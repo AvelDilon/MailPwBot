@@ -55,6 +55,8 @@ namespace PwBot
 
         public static void Init()
         {
+            if (INF.Count > 0)
+                return;
             INF.Clear();
             INF.Add(682, new Beast(682, 1, "Ледяной тигр", new int[] { 1000, 1200, 1440, 1730, 2079, 2490, 2990, 3589, 4300 }));
             INF.Add(683, new Beast(683, 1, "Механический тигр", new int[] { 1007, 1208, 1450, 1742, 2094, 2507, 3010, 3615, 4330 }));
@@ -144,6 +146,8 @@ namespace PwBot
 
         public static void Init()
         {
+            if (BRL.Count > 0)
+                return;
             BRL.Clear();
             int i = 1;
             foreach (int j in PRIZE_LIST)

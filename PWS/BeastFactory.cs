@@ -114,7 +114,7 @@ namespace PwBot
                 uint[] oa = new uint[buffer.Length / 4];
                 Buffer.BlockCopy(buffer, 0, oa, 0, buffer.Length);
                 Beast NB = Beast.Parse(oa, CHR);
-                if (NB != null)
+                if (NB != null && !MY.ContainsKey(NB.ID))
                     MY.Add(NB.ID, NB);
                 MAB += OFS.GetInt("BS_ArrayItemSize");
             }
@@ -153,7 +153,7 @@ namespace PwBot
                 uint[] oa = new uint[buffer.Length / 4];
                 Buffer.BlockCopy(buffer, 0, oa, 0, buffer.Length);
                 Beast NB = Beast.Parse(oa, CHR);
-                if (NB != null)
+                if (NB != null && !ENEMY.ContainsKey(NB.ID))
                     ENEMY.Add(NB.ID, NB);
                 EAB += OFS.GetInt("BS_ArrayItemSize");
             }

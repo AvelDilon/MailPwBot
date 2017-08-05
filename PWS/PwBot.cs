@@ -45,6 +45,8 @@ namespace PwBot
             foreach (Client IC in Client.CL)
                 if (IC.CHR.Name.Equals(PRS.SelectedItem))
                     Client.CC = IC;
+            BB_RUN.Refresh();
+            FairyStart.Refresh();
         }
 
         private void PWS_FormClosing(object sender, FormClosingEventArgs e)
