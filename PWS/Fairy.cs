@@ -142,7 +142,6 @@ namespace PwBot
             BEST = BEST.id == 0 ? WORST : BEST;
             Boolean RA = RAS.Analize();
             (RA ? WORST : BEST).Equip(0x17);
-            //Item.Equip(CHR.HNDL, RA ? WORST.place : BEST.place, 0x17);
             return RA ? WORST : BEST;
         }
 
@@ -163,57 +162,42 @@ namespace PwBot
             new Packet(CHR.HNDL, "73-00-01").Send();
         }
 
+        public void FairyEnchancementThead()
+        {
+            IsRun = true;
+            FairyItem FFE = SelectFairyForEnchance();
+            if (FFE.id == 0)
+                return;
+            Thread.Sleep(1000);
+            FairyItem F1 = GetEquiped();
+            while (LevelUpForSpirit())
+            {
+                Thread.Sleep(2200);
+                FairyItem F2 = GetEquiped();
+                if (F2.P1 > F1.P1)
+                {
+                    RAS.Add(F2.P1 - F1.P1);
+                    break;
+                }
+            }
+            Thread.Sleep(2000);
+            FairyItem FF = GetEquiped();
+            if (!FF.IsGood() && FF.lvl < 100)
+                Detach();
+            FairyEnchancementThead();
+            THH.SelfStop("FET:" + CHR.Name);
+            IsRun = false;
+        }
+
         public void RunFairyEnchancement()
         {
-            new ET(this);
+            THH.StartNewThread(FairyEnchancementThead, "FET:" + CHR.Name);
         }
 
         public void StopFairyEnchancement()
         {
-            THH.StopThread(ET.THN);
+            THH.StopThread("FET:" + CHR.Name);
             IsRun = false;
         }
-
-        private class ET
-        {
-            public static string THN = "FAIRY_P";
-            static Fairy F;
-
-            public ET(Fairy CF)
-            {
-                F = CF;
-                F.IsRun = true;
-                THH.StartNewThread(EnchancementThead, THN);
-            }
-
-            static void EnchancementThead()
-            {
-                FairyItem FFE = F.SelectFairyForEnchance();
-                if (FFE.id == 0)
-                {
-                    THH.SelfStop(THN);
-                    F.IsRun = false;
-                    return;
-                }
-                Thread.Sleep(1000);
-                FairyItem F1 = F.GetEquiped();
-                while (F.LevelUpForSpirit())
-                {
-                    Thread.Sleep(2200);
-                    FairyItem F2 = F.GetEquiped();
-                    if (F2.P1 > F1.P1)
-                    {
-                        RAS.Add(F2.P1 - F1.P1);
-                        break;
-                    }
-                }
-                Thread.Sleep(2000);
-                FairyItem FF = F.GetEquiped();
-                if (!FF.IsGood() && FF.lvl < 100)
-                    F.Detach();
-                EnchancementThead();
-            }
-        }
-
     }
 }

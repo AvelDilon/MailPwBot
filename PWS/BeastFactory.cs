@@ -53,6 +53,7 @@ namespace PwBot
                 CHR.WND.Click("Win_HomePetFirstAward", "Btn_Close");
             }
             Run();
+            THH.SelfStop("BeastBattle:" + CHR.Name);
             IsRun = false;
         }
 

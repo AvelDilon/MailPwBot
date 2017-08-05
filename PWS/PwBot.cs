@@ -183,9 +183,9 @@ namespace PwBot
         private void FairyStart_Paint(object sender, PaintEventArgs e)
         {
             if (Client.CC.CHR.FAIRY.IsRun)
-                BB_RUN.Text = "Остановить";
+                FairyStart.Text = "Остановить";
             else
-                BB_RUN.Text = "Запустить";
+                FairyStart.Text = "Запустить";
         }
     }
 }
