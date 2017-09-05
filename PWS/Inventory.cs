@@ -35,7 +35,7 @@ namespace PwBot
         public void Load()
         {
             IL.Clear();
-            PTR = Memory.RD(CHR.HNDL, "BA+GA_OFS+PlayerStruct+p_Inventory");
+            PTR = Memory.RD(CHR.HNDL, "BA+GA_OFS+PlayerStruct+Player_Inventory_Struct");
             MAX_ITEMS = Memory.RD(CHR.HNDL, PTR + OFS.GetInt("Inventory_MaxSize"));
             IL = LoadStruct(CHR, Memory.RD(CHR.HNDL, PTR + OFS.GetInt("Inventory_Array")), MAX_ITEMS);
         }

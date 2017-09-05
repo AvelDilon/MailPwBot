@@ -32,8 +32,14 @@
             this.PRS = new System.Windows.Forms.ComboBox();
             this.SCAN = new System.Windows.Forms.Button();
             this.ZB = new System.Windows.Forms.TabPage();
+            this.OBCB = new System.Windows.Forms.CheckBox();
             this.BB_RUN = new System.Windows.Forms.Button();
             this.TP2 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.FG = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.FairyStart = new System.Windows.Forms.Button();
             this.ALP = new System.Windows.Forms.TabPage();
             this.SetClient = new System.Windows.Forms.Button();
             this.RemAcc = new System.Windows.Forms.Button();
@@ -41,12 +47,8 @@
             this.RunClient = new System.Windows.Forms.Button();
             this.LGS = new System.Windows.Forms.ComboBox();
             this.TC1 = new System.Windows.Forms.TabControl();
-            this.FairyStart = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.FG = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.OBCB = new System.Windows.Forms.CheckBox();
+            this.PointLimit = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.ZB.SuspendLayout();
             this.TP2.SuspendLayout();
             this.ALP.SuspendLayout();
@@ -75,6 +77,8 @@
             // 
             // ZB
             // 
+            this.ZB.Controls.Add(this.label4);
+            this.ZB.Controls.Add(this.PointLimit);
             this.ZB.Controls.Add(this.OBCB);
             this.ZB.Controls.Add(this.BB_RUN);
             this.ZB.Location = new System.Drawing.Point(4, 22);
@@ -84,6 +88,16 @@
             this.ZB.TabIndex = 2;
             this.ZB.Text = "Звери";
             this.ZB.UseVisualStyleBackColor = true;
+            // 
+            // OBCB
+            // 
+            this.OBCB.AutoSize = true;
+            this.OBCB.Location = new System.Drawing.Point(15, 13);
+            this.OBCB.Name = "OBCB";
+            this.OBCB.Size = new System.Drawing.Size(119, 17);
+            this.OBCB.TabIndex = 1;
+            this.OBCB.Text = "Открывать мешки";
+            this.OBCB.UseVisualStyleBackColor = true;
             // 
             // BB_RUN
             // 
@@ -111,6 +125,55 @@
             this.TP2.Size = new System.Drawing.Size(252, 175);
             this.TP2.TabIndex = 1;
             this.TP2.Text = "Джин";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(98, 65);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "из 100";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Качать: ";
+            // 
+            // FG
+            // 
+            this.FG.Location = new System.Drawing.Point(58, 62);
+            this.FG.Name = "FG";
+            this.FG.Size = new System.Drawing.Size(35, 20);
+            this.FG.TabIndex = 5;
+            this.FG.Text = "70";
+            this.FG.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 13);
+            this.label1.MaximumSize = new System.Drawing.Size(240, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(228, 26);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Купите джинов, положите их в интвентарь. И... Оставьте немного места :)";
+            // 
+            // FairyStart
+            // 
+            this.FairyStart.Font = new System.Drawing.Font("Monotype Corsiva", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FairyStart.Location = new System.Drawing.Point(3, 131);
+            this.FairyStart.Name = "FairyStart";
+            this.FairyStart.Size = new System.Drawing.Size(246, 41);
+            this.FairyStart.TabIndex = 3;
+            this.FairyStart.Text = "Запустить";
+            this.FairyStart.UseVisualStyleBackColor = true;
+            this.FairyStart.Click += new System.EventHandler(this.FairyStart_Click);
+            this.FairyStart.Paint += new System.Windows.Forms.PaintEventHandler(this.FairyStart_Paint);
             // 
             // ALP
             // 
@@ -190,64 +253,22 @@
             this.TC1.Size = new System.Drawing.Size(260, 201);
             this.TC1.TabIndex = 5;
             // 
-            // FairyStart
+            // PointLimit
             // 
-            this.FairyStart.Font = new System.Drawing.Font("Monotype Corsiva", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FairyStart.Location = new System.Drawing.Point(3, 131);
-            this.FairyStart.Name = "FairyStart";
-            this.FairyStart.Size = new System.Drawing.Size(246, 41);
-            this.FairyStart.TabIndex = 3;
-            this.FairyStart.Text = "Запустить";
-            this.FairyStart.UseVisualStyleBackColor = true;
-            this.FairyStart.Click += new System.EventHandler(this.FairyStart_Click);
-            this.FairyStart.Paint += new System.Windows.Forms.PaintEventHandler(this.FairyStart_Paint);
+            this.PointLimit.Location = new System.Drawing.Point(110, 36);
+            this.PointLimit.Name = "PointLimit";
+            this.PointLimit.Size = new System.Drawing.Size(45, 20);
+            this.PointLimit.TabIndex = 2;
+            this.PointLimit.Text = "3000";
             // 
-            // label1
+            // label4
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 13);
-            this.label1.MaximumSize = new System.Drawing.Size(240, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(228, 26);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Купите джинов, положите их в интвентарь. И... Оставьте немного места :)";
-            // 
-            // FG
-            // 
-            this.FG.Location = new System.Drawing.Point(58, 62);
-            this.FG.Name = "FG";
-            this.FG.Size = new System.Drawing.Size(35, 20);
-            this.FG.TabIndex = 5;
-            this.FG.Text = "70";
-            this.FG.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Качать: ";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(98, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "из 100";
-            // 
-            // OBCB
-            // 
-            this.OBCB.AutoSize = true;
-            this.OBCB.Location = new System.Drawing.Point(15, 13);
-            this.OBCB.Name = "OBCB";
-            this.OBCB.Size = new System.Drawing.Size(119, 17);
-            this.OBCB.TabIndex = 1;
-            this.OBCB.Text = "Открывать мешки";
-            this.OBCB.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 39);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Набить не более";
             // 
             // PwBot
             // 
@@ -295,6 +316,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox FG;
         private System.Windows.Forms.CheckBox OBCB;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox PointLimit;
     }
 }
 

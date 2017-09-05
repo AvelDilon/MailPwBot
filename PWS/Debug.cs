@@ -37,6 +37,7 @@ namespace PwBot
             Client.CC.CHR.Load();
             LTB.Clear();
             LTB.AppendText("Персонаж: " + Client.CC.CHR.Name + "\r\n");
+            LTB.AppendText("ID: " + Client.CC.CHR.ID + "\r\n");
             LTB.AppendText("================================\r\n");
             LTB.AppendText("X: " + Client.CC.CHR.LOC.x + "\t [" + Client.CC.CHR.LOC.gx + "]\r\n");
             LTB.AppendText("Y: " + Client.CC.CHR.LOC.y + "\t [" + Client.CC.CHR.LOC.gy + "]\r\n");
@@ -102,14 +103,14 @@ namespace PwBot
                 LTB.AppendText("DAMAGE_ANAL:" + b.DAR + "\r\n");
                 LTB.AppendText("[========================]\r\n");
             }
-            /*LTB.AppendText("[======= INVENTARY! =======]\r\n");
+            LTB.AppendText("[======= INVENTARY! =======]\r\n");
             foreach (BeastItem bi in Client.CC.CHR.MBF.BIL.Values)
             {
                  LTB.AppendText("ID:" + bi.id + "\r\n");
                  LTB.AppendText("Count:" + bi.count + "\r\n");
                  LTB.AppendText("INCUBE:" + bi.NeedIncube + "\r\n");
                  LTB.AppendText("[========================]\r\n");
-            }*/
+            }
         }
 
         private void Debug_FormClosing(object sender, FormClosingEventArgs e)
@@ -134,9 +135,9 @@ namespace PwBot
             foreach (GameWindow w in Client.CC.CHR.WND.WL)
                 if (w.visibility > 0)
                 {
-                    LTB.AppendText("WIN: " + w.name + " ==> [" + w.visibility + "] ~~ " + w.ptr + "\r\n");
-                    foreach (WindowControl c in w.CL)
-                        LTB.AppendText("  CNT: " + c.name + " ==> [" + c.CN + "]\r\n");
+                    LTB.AppendText("WIN: " + w.name + " ==> [" + w.visibility + "] ~~ " + w.ptr + " (" + w.GF.ToString("X4") + ")\r\n");
+                    /*foreach (WindowControl c in w.CL)
+                        LTB.AppendText("  CNT: " + c.name + " ==> [" + c.CN + "]\r\n");*/
                 }
         }
 

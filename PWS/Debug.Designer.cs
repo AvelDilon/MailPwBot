@@ -73,11 +73,11 @@
             // 
             this.TEST.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.TEST.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TEST.Location = new System.Drawing.Point(119, 433);
+            this.TEST.Location = new System.Drawing.Point(13, 431);
             this.TEST.Name = "TEST";
             this.TEST.Size = new System.Drawing.Size(207, 23);
             this.TEST.TabIndex = 3;
-            this.TEST.Text = "!! TEST !!";
+            this.TEST.Text = "!! BEAST !!";
             this.TEST.UseVisualStyleBackColor = true;
             this.TEST.Click += new System.EventHandler(this.TEST_Click);
             // 

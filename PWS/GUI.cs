@@ -10,6 +10,7 @@ namespace PwBot
     {
         public int HNDL = -1;
         public int ptr;
+        public int GF;
         public String name;
         public int name_ptr;
         public int visibility;
@@ -68,21 +69,21 @@ namespace PwBot
             byte[] WP =
             {
                 0x60,                                   // PUSHAH
-                0x68, 0x00, 0x00, 0x00, 0x00,           // push NTL_CriticalSectionPtr
-                0xFF, 0x15, 0x00, 0x00, 0x00, 0x00,     // call [NTL_EnterCriticalSection]
+                0x68, 0x00, 0x00, 0x00, 0x00,           // push NTDLL_CriticalSectionPtr
+                0xFF, 0x15, 0x00, 0x00, 0x00, 0x00,     // call [NTDLL_EnterCriticalSection]
                 0xB9, 0x00, 0x00, 0x00, 0x00,           // mov ecx, WinPtr
                 0x68, 0x00, 0x00, 0x00, 0x00,           // push ControlStringPtr
                 0xBB, 0x00, 0x00, 0x00, 0x00,           // mov ebx, GuiPtr
                 0xFF, 0xD3,                             // call ebx
-                0x68, 0x00, 0x00, 0x00, 0x00,           // push NTL_CriticalSectionPtr
-                0xFF, 0x15, 0x00, 0x00, 0x00, 0x00,     // call [NTL_LeaveCriticalSection]
+                0x68, 0x00, 0x00, 0x00, 0x00,           // push NTDLL_CriticalSectionPtr
+                0xFF, 0x15, 0x00, 0x00, 0x00, 0x00,     // call [NTDLL_LeaveCriticalSection]
                 0x61, 0xC3                              // POPAD, RET
             };
             Packet P = new Packet(WND.HNDL, WP);
-            P.Copy(OFS.GetUInt("NTL_CriticalSectionPtr"), 2, 4);
-            P.Copy(OFS.GetUInt("NTL_CriticalSectionPtr"), 30, 4);
-            P.Copy(OFS.GetUInt("NTL_EnterCriticalSection"), 8, 4);
-            P.Copy(OFS.GetUInt("NTL_LeaveCriticalSection"), 36, 4);
+            P.Copy(OFS.GetUInt("NTDLL_CriticalSectionPtr"), 2, 4);
+            P.Copy(OFS.GetUInt("NTDLL_CriticalSectionPtr"), 30, 4);
+            P.Copy(OFS.GetUInt("NTDLL_EnterCriticalSection"), 8, 4);
+            P.Copy(OFS.GetUInt("NTDLL_LeaveCriticalSection"), 36, 4);
             P.Copy(OFS.GetUInt("GUI"), 23, 4);
             P.Copy(WND.ptr, 13, 4);
             P.Copy(CtrlNamePtr, 18, 4);
@@ -118,6 +119,7 @@ namespace PwBot
                 {
                     GameWindow w = new GameWindow(CHR.HNDL);
                     w.ptr = Memory.RD(CHR.HNDL, P + OFS.GetInt("Gui_Win_Ptr"));
+                    w.GF = Memory.RD(CHR.HNDL, Memory.RD(CHR.HNDL, w.ptr) + 0x30);
                     w.name_ptr = Memory.RD(CHR.HNDL, w.ptr + OFS.GetInt("Gui_Win_Name"));
                     w.name = Memory.RS(CHR.HNDL, w.name_ptr, 64, false);
                     w.visibility = Memory.RD(CHR.HNDL, w.ptr + OFS.GetInt("Gui_Win_Visibility"));

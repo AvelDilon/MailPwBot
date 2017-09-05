@@ -16,6 +16,7 @@ namespace PwBot
         public Dictionary<int, Beast> ENEMY = new Dictionary<int, Beast>();
         public Dictionary<int, BeastItem> BIL = new Dictionary<int, BeastItem>();
         public int Points = -1;
+        public int PointLimit = 3000;
         public int Reward = -1;
         public int GamesRemain = -1;
         public Boolean OpenBags = true;
@@ -29,7 +30,7 @@ namespace PwBot
             CHR.WND.WaitForWindow("Win_Chat", 20, false);
             LoadMine();
             Utils.RandomDelay();
-            if (GamesRemain < 1)
+            if (GamesRemain < 1 || Points > PointLimit)
                 return;
             OpenBattle();
             Utils.RandomDelay();
