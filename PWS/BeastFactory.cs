@@ -20,6 +20,7 @@ namespace PwBot
         public int Reward = -1;
         public int GamesRemain = -1;
         public Boolean OpenBags = true;
+        public Boolean SkipBattles = true;
 
         public BeastFactory(Character CHR) { this.CHR = CHR; Beast.Init(); BeastReward.Init(); }
 
@@ -28,6 +29,7 @@ namespace PwBot
             IsRun = true;
             CHR.EnterHome();
             CHR.WND.WaitForWindow("Win_Chat", 20, false);
+            Utils.RandomDelay();
             LoadMine();
             Utils.RandomDelay();
             if (GamesRemain < 1 || Points > PointLimit)
@@ -43,11 +45,16 @@ namespace PwBot
             Utils.RandomDelay();
             StartBattle(BB, EC);
             Utils.RandomDelay();
-            if (CHR.WND.WaitForWindow("Win_HomePetPrepare", 10))
+            if (SkipBattles)
             {
-                Utils.RandomDelay();
-                CHR.WND.Click("Win_HomePetPrepare", "Btn_Skip");
+                if (CHR.WND.WaitForWindow("Win_HomePetPrepare", 10))
+                {
+                    Utils.RandomDelay(800, 1200);
+                    CHR.WND.Click("Win_HomePetPrepare", "Btn_Skip");
+                }
             }
+            else
+                CHR.WND.WaitForWindow("Win_HomePetPrepare", 60, true, false);
             if (CHR.WND.WaitForWindow("Win_HomePetFirstAward", 10))
             {
                 GetPrizeBag();

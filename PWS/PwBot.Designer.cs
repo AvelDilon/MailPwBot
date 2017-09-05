@@ -32,6 +32,8 @@
             this.PRS = new System.Windows.Forms.ComboBox();
             this.SCAN = new System.Windows.Forms.Button();
             this.ZB = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.PointLimit = new System.Windows.Forms.TextBox();
             this.OBCB = new System.Windows.Forms.CheckBox();
             this.BB_RUN = new System.Windows.Forms.Button();
             this.TP2 = new System.Windows.Forms.TabPage();
@@ -47,8 +49,7 @@
             this.RunClient = new System.Windows.Forms.Button();
             this.LGS = new System.Windows.Forms.ComboBox();
             this.TC1 = new System.Windows.Forms.TabControl();
-            this.PointLimit = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.SkipBattles = new System.Windows.Forms.CheckBox();
             this.ZB.SuspendLayout();
             this.TP2.SuspendLayout();
             this.ALP.SuspendLayout();
@@ -77,6 +78,7 @@
             // 
             // ZB
             // 
+            this.ZB.Controls.Add(this.SkipBattles);
             this.ZB.Controls.Add(this.label4);
             this.ZB.Controls.Add(this.PointLimit);
             this.ZB.Controls.Add(this.OBCB);
@@ -89,9 +91,28 @@
             this.ZB.Text = "Звери";
             this.ZB.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 77);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Набить не более";
+            // 
+            // PointLimit
+            // 
+            this.PointLimit.Location = new System.Drawing.Point(110, 74);
+            this.PointLimit.Name = "PointLimit";
+            this.PointLimit.Size = new System.Drawing.Size(45, 20);
+            this.PointLimit.TabIndex = 2;
+            this.PointLimit.Text = "3000";
+            // 
             // OBCB
             // 
             this.OBCB.AutoSize = true;
+            this.OBCB.Checked = true;
+            this.OBCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.OBCB.Location = new System.Drawing.Point(15, 13);
             this.OBCB.Name = "OBCB";
             this.OBCB.Size = new System.Drawing.Size(119, 17);
@@ -253,22 +274,15 @@
             this.TC1.Size = new System.Drawing.Size(260, 201);
             this.TC1.TabIndex = 5;
             // 
-            // PointLimit
+            // SkipBattles
             // 
-            this.PointLimit.Location = new System.Drawing.Point(110, 36);
-            this.PointLimit.Name = "PointLimit";
-            this.PointLimit.Size = new System.Drawing.Size(45, 20);
-            this.PointLimit.TabIndex = 2;
-            this.PointLimit.Text = "3000";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 39);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Набить не более";
+            this.SkipBattles.AutoSize = true;
+            this.SkipBattles.Location = new System.Drawing.Point(15, 36);
+            this.SkipBattles.Name = "SkipBattles";
+            this.SkipBattles.Size = new System.Drawing.Size(189, 17);
+            this.SkipBattles.TabIndex = 4;
+            this.SkipBattles.Text = "Пропускать бои (иногда падает)";
+            this.SkipBattles.UseVisualStyleBackColor = true;
             // 
             // PwBot
             // 
@@ -318,6 +332,7 @@
         private System.Windows.Forms.CheckBox OBCB;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox PointLimit;
+        private System.Windows.Forms.CheckBox SkipBattles;
     }
 }
 

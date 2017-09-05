@@ -170,7 +170,7 @@ namespace PwBot
             if (TV1.Text.Length > 0 && TV2.Text.Length > 0)
             {
                 LTB.Clear();
-                LTB.AppendText("CLICK control " + TV2.Text + " in window " + TV1.Text + "\r\n");
+                LTB.AppendText("CLICK control (" + TV2.Text + ") in window [" + TV1.Text + "]\r\n");
                 Client.CC.CHR.WND.Click(TV1.Text, TV2.Text);
             }
         }

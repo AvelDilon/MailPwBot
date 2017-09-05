@@ -147,6 +147,7 @@ namespace PwBot
             if (BB_RUN.Text.Equals("Запустить"))
             {
                 Client.CC.CHR.MBF.OpenBags = OBCB.Checked;
+                Client.CC.CHR.MBF.SkipBattles = SkipBattles.Checked;
                 try { Client.CC.CHR.MBF.PointLimit = Int32.Parse(PointLimit.Text); } catch { }
                 Client.CC.CHR.MBF.RunBeastBattle();
                 BB_RUN.Text = "Остановить";

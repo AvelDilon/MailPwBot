@@ -202,7 +202,7 @@ namespace PwBot
 
         public Boolean CheckCurrentWindow(String name) { return CheckCurrentWindow(new String[] { name }); }
         public Boolean IsWindowOpen(String name, Boolean strict = true) { foreach (GameWindow w in WL) if (w.name.Equals(name) && (strict ? w.visibility == 1 : w.visibility > 0)) return true; return false; }
-        public Boolean WaitForWindow(String name, int sec, Boolean strict = true)
+        public Boolean WaitForWindow(String name, int sec, Boolean strict = true, Boolean NeedOpen = true)
         {
             DateTime WU = DateTime.Now.AddSeconds(sec);
             while (true)
@@ -210,7 +210,7 @@ namespace PwBot
                 if (!CHR.CLNT.IsRun())
                     return false;
                 LoadAllWindows();
-                if (IsWindowOpen(name, strict))
+                if (!(NeedOpen ^ IsWindowOpen(name, strict)))
                     return true;
                 if (DateTime.Now.CompareTo(WU) > 0)
                     return false;
