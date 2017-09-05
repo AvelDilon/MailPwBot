@@ -206,8 +206,18 @@ namespace PwBot
                 LTB.AppendText("LVL:" + FI.lvl + "\r\n");
                 LTB.AppendText("===============================\r\n");
             }
-            LTB.AppendText("[SELCTED] ID:" + FFE.id + "\r\n");
-            LTB.AppendText("[SELCTED] LVL:" + FFE.lvl + "\r\n");
+            LTB.AppendText("[SELECTED] ID:" + FFE.id + "\r\n");
+            LTB.AppendText("[SELECTED] LVL:" + FFE.lvl + "\r\n");
+        }
+
+        private void CritCtrl_Click(object sender, EventArgs e)
+        {
+            if (TV1.Text.Length > 0 && TV2.Text.Length > 0)
+            {
+                LTB.Clear();
+                LTB.AppendText("CLICK control (" + TV2.Text + ") in window [" + TV1.Text + "]\r\n");
+                Client.CC.CHR.WND.Click(TV1.Text, TV2.Text);
+            }
         }
     }
 }

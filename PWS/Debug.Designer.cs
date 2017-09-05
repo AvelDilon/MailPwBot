@@ -38,7 +38,7 @@
             this.EH = new System.Windows.Forms.Button();
             this.CTRL = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.CritCtrl = new System.Windows.Forms.Button();
             this.TV1 = new System.Windows.Forms.TextBox();
             this.TV2 = new System.Windows.Forms.TextBox();
             this.TV3 = new System.Windows.Forms.TextBox();
@@ -155,7 +155,7 @@
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button5.Location = new System.Drawing.Point(226, 373);
+            this.button5.Location = new System.Drawing.Point(226, 402);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(101, 23);
             this.button5.TabIndex = 10;
@@ -163,16 +163,17 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button6
+            // CritCtrl
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button6.Location = new System.Drawing.Point(226, 403);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(101, 23);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "NOP";
-            this.button6.UseVisualStyleBackColor = true;
+            this.CritCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CritCtrl.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CritCtrl.Location = new System.Drawing.Point(226, 373);
+            this.CritCtrl.Name = "CritCtrl";
+            this.CritCtrl.Size = new System.Drawing.Size(101, 23);
+            this.CritCtrl.TabIndex = 11;
+            this.CritCtrl.Text = "CritCtrl";
+            this.CritCtrl.UseVisualStyleBackColor = true;
+            this.CritCtrl.Click += new System.EventHandler(this.CritCtrl_Click);
             // 
             // TV1
             // 
@@ -205,7 +206,7 @@
             this.Controls.Add(this.TV3);
             this.Controls.Add(this.TV2);
             this.Controls.Add(this.TV1);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.CritCtrl);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.CTRL);
             this.Controls.Add(this.EH);
@@ -240,7 +241,7 @@
         private System.Windows.Forms.Button EH;
         private System.Windows.Forms.Button CTRL;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button CritCtrl;
         private System.Windows.Forms.TextBox TV1;
         private System.Windows.Forms.TextBox TV2;
         private System.Windows.Forms.TextBox TV3;
