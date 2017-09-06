@@ -143,6 +143,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PwBot.resx">
       <DependentUpon>PwBot.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -155,6 +156,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="OFS.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
