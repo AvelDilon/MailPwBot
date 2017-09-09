@@ -219,5 +219,12 @@ namespace PwBot
                 Client.CC.CHR.WND.Click(TV1.Text, TV2.Text);
             }
         }
+
+        private void Move_Click(object sender, EventArgs e)
+        {
+            Client.CC.CHR.LoadLocation();
+            Client.CC.CHR.LOC.Add(0.5F, 0.5F, 0F);
+            Client.CC.CHR.Move(Client.CC.CHR.LOC);
+        }
     }
 }

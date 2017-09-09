@@ -64,7 +64,7 @@ namespace PwBot
         public bool Click_Critical()
         {
             int CtrlNamePtr = CN.Trim().Length > 0 ? CP : (name.Trim().Length > 0 ? name_ptr : -1);
-            if (name_ptr == -1)
+            if (CtrlNamePtr == -1)
                 return false;
             byte[] WP =
             {
@@ -91,10 +91,10 @@ namespace PwBot
             return P.Execute();
         }
 
-        public bool Click()
+        public bool Click2()
         {
             int CtrlNamePtr = CN.Trim().Length > 0 ? CP : (name.Trim().Length > 0 ? name_ptr : -1);
-            if (name_ptr == -1)
+            if (CtrlNamePtr == -1)
                 return false;
             byte[] WP =
             {
@@ -102,7 +102,8 @@ namespace PwBot
                     0xBE, 0x00, 0x00, 0x00, 0x00,           // mov esi, WinPtr
                     0x8B, 0x16,                             // mov edx,[esi]
                     0x8B, 0x42, 0x30,                       // mov eax,[edx + 30]
-                    0x68, 0x00, 0x00, 0x00, 0x00,           // push ControlStringPtr
+                    0xBD, 0x00, 0x00, 0x00, 0x00,           // mov ebp, ControlStringPtr
+                    0x55,                                   // push ebp
                     0x8B, 0xCE,                             // mov ecx, esi
                     0xFF, 0xD0,                             // call eax
                     0x61, 0xC3                              // POPAD, RET
@@ -111,6 +112,29 @@ namespace PwBot
             P.Copy(WND.ptr, 2, 4);
             P.Copy(CtrlNamePtr, 12, 4);
             return P.Execute();
+        }
+
+        public bool Click()
+        {
+            String CtrlName = CN.Trim().Length > 0 ? CN : (name.Trim().Length > 0 ? name : null);
+            if (CtrlName == null)
+                return false;
+            byte[] WP =
+            {
+                    0x60,                                   // PUSHAH
+                    0xBE, 0x00, 0x00, 0x00, 0x00,           // mov esi, WinPtr
+                    0x8B, 0x16,                             // mov edx,[esi]
+                    0x8B, 0x42, 0x30,                       // mov eax,[edx + 30]
+                    0xBD, 0x00, 0x00, 0x00, 0x00,           // mov ebp, ControlStringPtr
+                    0x55,                                   // push ebp
+                    0x8B, 0xCE,                             // mov ecx, esi
+                    0xFF, 0xD0,                             // call eax
+                    0x61, 0xC3                              // POPAD, RET
+            };
+            Packet P = new Packet(WND.HNDL, WP);
+            P.Copy(WND.ptr, 2, 4);
+            byte[] R = P.Execute(Encoding.ASCII.GetBytes(CtrlName), 12);
+            return R.Length > 0;
         }
     }
 

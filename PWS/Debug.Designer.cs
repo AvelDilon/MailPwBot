@@ -42,6 +42,7 @@
             this.TV1 = new System.Windows.Forms.TextBox();
             this.TV2 = new System.Windows.Forms.TextBox();
             this.TV3 = new System.Windows.Forms.TextBox();
+            this.MoveChar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LTB
@@ -196,6 +197,18 @@
             this.TV3.Size = new System.Drawing.Size(171, 20);
             this.TV3.TabIndex = 14;
             // 
+            // MoveChar
+            // 
+            this.MoveChar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.MoveChar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.MoveChar.Location = new System.Drawing.Point(226, 431);
+            this.MoveChar.Name = "MoveChar";
+            this.MoveChar.Size = new System.Drawing.Size(101, 23);
+            this.MoveChar.TabIndex = 15;
+            this.MoveChar.Text = "Check Move";
+            this.MoveChar.UseVisualStyleBackColor = true;
+            this.MoveChar.Click += new System.EventHandler(this.Move_Click);
+            // 
             // Debug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,6 +216,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(540, 468);
+            this.Controls.Add(this.MoveChar);
             this.Controls.Add(this.TV3);
             this.Controls.Add(this.TV2);
             this.Controls.Add(this.TV1);
@@ -245,5 +259,6 @@
         private System.Windows.Forms.TextBox TV1;
         private System.Windows.Forms.TextBox TV2;
         private System.Windows.Forms.TextBox TV3;
+        private System.Windows.Forms.Button MoveChar;
     }
 }

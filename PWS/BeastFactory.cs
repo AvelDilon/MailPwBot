@@ -58,7 +58,7 @@ namespace PwBot
             if (CHR.WND.WaitForWindow("Win_HomePetFirstAward", 10))
             {
                 GetPrizeBag();
-                CHR.WND.Click("Win_HomePetFirstAward", "Btn_Close", true);
+                CHR.WND.Click("Win_HomePetFirstAward", "Btn_Close");
             }
             Run();
             THH.SelfStop("BeastBattle:" + CHR.Name);
