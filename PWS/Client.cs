@@ -10,7 +10,7 @@ namespace PwBot
     public class Client
     {
         public static List<Client> CL = new List<Client>();
-        public static Client CC;
+        public static Client CC = null;
         public static String SERVER = "altair";
 
         public int PID = -1;

@@ -1,6 +1,6 @@
 ﻿namespace PwBot
 {
-    partial class LoginAddForm
+    partial class LoginEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginAddForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginEditForm));
             this.LGN = new System.Windows.Forms.TextBox();
             this.PSW = new System.Windows.Forms.TextBox();
             this.PNU = new System.Windows.Forms.TextBox();
@@ -48,8 +48,6 @@
             this.LGN.Name = "LGN";
             this.LGN.Size = new System.Drawing.Size(166, 20);
             this.LGN.TabIndex = 0;
-            this.LGN.Enter += new System.EventHandler(this.LGN_Enter);
-            this.LGN.Leave += new System.EventHandler(this.LGN_Leave);
             // 
             // PSW
             // 
@@ -57,8 +55,6 @@
             this.PSW.Name = "PSW";
             this.PSW.Size = new System.Drawing.Size(166, 20);
             this.PSW.TabIndex = 1;
-            this.PSW.Enter += new System.EventHandler(this.PSW_Enter);
-            this.PSW.Leave += new System.EventHandler(this.PSW_Leave);
             // 
             // PNU
             // 
@@ -66,8 +62,6 @@
             this.PNU.Name = "PNU";
             this.PNU.Size = new System.Drawing.Size(166, 20);
             this.PNU.TabIndex = 2;
-            this.PNU.Enter += new System.EventHandler(this.PNU_Enter);
-            this.PNU.Leave += new System.EventHandler(this.PNU_Leave);
             // 
             // label1
             // 
@@ -102,8 +96,6 @@
             this.DES.Name = "DES";
             this.DES.Size = new System.Drawing.Size(166, 20);
             this.DES.TabIndex = 6;
-            this.DES.Enter += new System.EventHandler(this.DES_Enter);
-            this.DES.Leave += new System.EventHandler(this.DES_Leave);
             // 
             // label4
             // 
@@ -120,7 +112,7 @@
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 8;
-            this.AddButton.Text = "Добавить";
+            this.AddButton.Text = "Сохранить";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
@@ -135,7 +127,7 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // LoginAddForm
+            // LoginEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -153,12 +145,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "LoginAddForm";
+            this.Name = "LoginEditForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Добавление логина";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginAddForm_FormClosing);
+            this.Text = "Редактирование логина";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

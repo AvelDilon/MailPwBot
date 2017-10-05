@@ -13,10 +13,11 @@ namespace PwBot
 {
     public partial class LoginAddForm : Form
     {
-        public static String LGN_DEF = "shit@mail.ru";
+        public static String LGN_DEF = "your@mail.ru";
         public static String PSW_DEF = "пароль";
         public static String PNU_DEF = "1";
-        public static String DES_DEF = "Валера";
+        public static String DES_DEF = "Антоний";
+        public String ICON = "001.png";
 
         public static LoginAddForm Instance = null;
 
@@ -103,7 +104,10 @@ namespace PwBot
                 String PSW_R = PSW.Text.Length == 0 ? PSW_DEF : PSW.Text;
                 String DES_R = DES.Text.Length == 0 ? DES_DEF : DES.Text;
                 int PNU_R = PNU.Text.Length == 0 ? 1 : Int32.Parse(PNU.Text);
-                LTA.AddLogin(LGN_R, PSW_R, DES_R, PNU_R);
+                foreach (GameAccount acc in AutoLogin.GetAccs())
+                    if (acc.name.Equals(DES_R))
+                        return;
+                LTA.AddLogin(LGN_R, PSW_R, DES_R, PNU_R, ICON);
             }
             catch { }
             ((PwBot)Owner).DrawAccs();
@@ -113,6 +117,24 @@ namespace PwBot
         private void LoginAddForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Instance = null;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OFD = new OpenFileDialog();
+            OFD.Filter = "All Files (*.*)|*.*";
+            OFD.FilterIndex = 1;
+            OFD.Multiselect = false;
+            OFD.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory + "icons";
+            if (OFD.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    ICON = OFD.SafeFileName;
+                    Image i = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + ICON);
+                    pictureBox1.Image = i;
+                } catch { };
+            }
         }
     }
 }

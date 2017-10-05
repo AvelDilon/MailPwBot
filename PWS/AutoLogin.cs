@@ -15,6 +15,16 @@ using static PwBot.PwDataSet;
 
 namespace PwBot
 {
+    public class GameAccount
+    {
+        public int id = -1;
+        public String name;
+        public String icon;
+        public String Login;
+        public String Password;
+        public int PERS_ID;
+    }
+
     class AutoLogin
     {
         public static UInt64 UID1 = 16358179426615842353;
@@ -161,7 +171,6 @@ namespace PwBot
 
         public void ThreadRun()
         {
-            PwBot.RunClient_ButtonChange();
             THH.StartNewThread(RunHandler, "RUN CLIENT: " + ACC_DESC);
         }
 
@@ -169,7 +178,6 @@ namespace PwBot
         {
             Run();
             THH.SelfStop("RUN CLIENT: " + ACC_DESC);
-            PwBot.RunClient_ButtonChange();
         }
 
         private void Run()
@@ -241,12 +249,21 @@ namespace PwBot
             }
         }
 
-        public static Dictionary<int, String> GetAccs()
+        public static List<GameAccount> GetAccs()
         {
-            Dictionary<int, String> O = new Dictionary<int, String>();
+            List<GameAccount> O = new List<GameAccount>();
             LoginTableAdapter LTA = new LoginTableAdapter();
-            foreach(LoginRow r in LTA.GetData())
-                O.Add(r.id, r.description);
+            foreach (LoginRow r in LTA.GetData())
+            {
+                GameAccount a = new GameAccount();
+                a.id = r.id;
+                a.icon = r.icon;
+                a.name = r.description;
+                a.Login = r.login;
+                a.Password = r.password;
+                a.PERS_ID = r.pers_num;
+                O.Add(a);
+            }
             return O;
         }
 

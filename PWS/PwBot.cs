@@ -54,38 +54,21 @@ namespace PwBot
             THH.StopAll();
         }
 
-        private void ShopSettings_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("shop.xlsx");
-        }
-
         public void DrawAccs()
         {
-            LGS.Items.Clear();
-            Dictionary<int, String> AL = AutoLogin.GetAccs();
-            foreach (String an in AL.Values)
+            ImageList IL = new ImageList();
+            IL.ImageSize = new Size(64, 64);
+            IL.ColorDepth = ColorDepth.Depth32Bit;
+            PIL.LargeImageList = IL;
+            PIL.Items.Clear();
+            foreach (GameAccount acc in AutoLogin.GetAccs())
             {
-                LGS.Items.Add(an);
-                LGS.SelectedIndex = LGS.Items.IndexOf(an);
+                IL.Images.Add(Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + acc.icon));
+                ListViewItem item = new ListViewItem();
+                item.ImageIndex = IL.Images.Count - 1;
+                item.Text = acc.name;
+                PIL.Items.Add(item);
             }
-        }
-
-        private void RunClient_Click(object sender, EventArgs e)
-        {
-            Dictionary<int, String> AL = AutoLogin.GetAccs();
-            if (AL.ContainsValue(LGS.SelectedItem.ToString()))
-            {
-                AutoLogin ALI = new AutoLogin(AL.FirstOrDefault(x => x.Value.Equals(LGS.SelectedItem.ToString())).Key);
-                ALI.Force = false;
-                ALI.ThreadRun();
-            }
-        }
-
-        public static void RunClient_ButtonChange()
-        {
-            if (Instance == null)
-                return;
-            Instance.RunClient.Invoke((ThreadStart)delegate () { Instance.RunClient.Enabled = !Instance.RunClient.Enabled; });
         }
 
         private void AddAcc_Click(object sender, EventArgs e)
@@ -111,17 +94,6 @@ namespace PwBot
                     DW.Top = Top;
                 }
             }
-        }
-
-        private void RemAcc_Click(object sender, EventArgs e)
-        {
-            if (LGS.Items.Count == 0 || LGS.SelectedItem.ToString().Length == 0)
-                return;
-            LoginDeleteForm DF = new LoginDeleteForm();
-            DF.Owner = this;
-            DF.Left = Left + Width;
-            DF.Top = Top;
-            DF.OpenMe(LGS.SelectedItem.ToString());
         }
 
         private void SetClient_Click(object sender, EventArgs e)
@@ -161,6 +133,12 @@ namespace PwBot
 
         private void BB_RUN_Paint(object sender, PaintEventArgs e)
         {
+            if (Client.CC == null)
+            {
+                BB_RUN.Enabled = false;
+                return;
+            }
+            BB_RUN.Enabled = true;
             if (Client.CC.CHR.MBF.IsRun)
                 BB_RUN.Text = "Остановить";
             else
@@ -184,10 +162,62 @@ namespace PwBot
 
         private void FairyStart_Paint(object sender, PaintEventArgs e)
         {
+            if (Client.CC == null)
+            {
+                FairyStart.Enabled = false;
+                return;
+            }
+            FairyStart.Enabled = true;
             if (Client.CC.CHR.FAIRY.IsRun)
                 FairyStart.Text = "Остановить";
             else
                 FairyStart.Text = "Запустить";
+        }
+
+        private void PIL_DoubleClick(object sender, EventArgs e)
+        {
+            foreach (GameAccount acc in AutoLogin.GetAccs())
+                if(acc.name.Equals(PIL.SelectedItems[0].Text))
+                {
+                    AutoLogin ALI = new AutoLogin(acc.id);
+                    ALI.Force = false;
+                    ALI.ThreadRun();
+                }
+        }
+
+        private void AccAdd_Click(object sender, EventArgs e)
+        {
+            LoginAddForm LF = LoginAddForm.GetInstance();
+            LF.Owner = this;
+            LF.Left = Left + Width;
+            LF.Top = Top;
+            LF.ShowDialog();
+        }
+
+        private void AccDel_Click(object sender, EventArgs e)
+        {
+            if (PIL.Items.Count == 0 || PIL.SelectedItems.Count == 0)
+                return;
+            LoginDeleteForm DF = new LoginDeleteForm();
+            DF.Owner = this;
+            DF.Left = Left + Width;
+            DF.Top = Top;
+            DF.OpenMe(PIL.SelectedItems[0].Text);
+        }
+
+        private void AccEdit_Click(object sender, EventArgs e)
+        {
+            if (PIL.SelectedItems.Count == 0)
+                return;
+            foreach (GameAccount acc in AutoLogin.GetAccs())
+                if (acc.name.Equals(PIL.SelectedItems[0].Text))
+                {
+                    LoginEditForm LF = new LoginEditForm(acc);
+                    LF.Owner = this;
+                    LF.Left = Left + Width;
+                    LF.Top = Top;
+                    LF.ShowDialog();
+                }
         }
     }
 }

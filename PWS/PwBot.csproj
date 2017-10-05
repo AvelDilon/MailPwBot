@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PwBot</RootNamespace>
     <AssemblyName>PwBot</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -89,6 +89,12 @@
     </Compile>
     <Compile Include="EF.cs" />
     <Compile Include="Fairy.cs" />
+    <Compile Include="LoginEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginEditForm.Designer.cs">
+      <DependentUpon>LoginEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     <Compile Include="Web.cs" />
     <EmbeddedResource Include="Debug.resx">
       <DependentUpon>Debug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginEditForm.resx">
+      <DependentUpon>LoginEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginAddForm.resx">
       <DependentUpon>LoginAddForm.cs</DependentUpon>
@@ -202,12 +211,41 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icons\001.jpg" />
+    <Content Include="icons\002.png" />
+    <Content Include="icons\003.ico" />
+    <Content Include="icons\004.png" />
+    <Content Include="icons\005.png" />
+    <Content Include="icons\006.png" />
+    <Content Include="icons\007.ico" />
+    <Content Include="icons\008.png" />
+    <Content Include="icons\009.png" />
+    <Content Include="icons\010.png" />
+    <Content Include="icons\011.png" />
+    <Content Include="icons\012.png" />
+    <Content Include="icons\013.ico" />
+    <Content Include="icons\014.jpg" />
+    <Content Include="icons\015.png" />
+    <Content Include="icons\016.png" />
+    <Content Include="icons\017.jpg" />
+    <Content Include="icons\018.png" />
+    <Content Include="icons\019.png" />
+    <Content Include="icons\020.ico" />
+    <Content Include="icons\021.png" />
+    <Content Include="icons\022.jpg" />
+    <Content Include="icons\023.jpg" />
+    <Content Include="icons\024.png" />
+    <Content Include="icons\025.png" />
+    <Content Include="icons\026.jpg" />
     <Content Include="paw.ico" />
     <Content Include="PwDB.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(ProjectDir)\icons" "$(TargetDir)icons\" /S /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
