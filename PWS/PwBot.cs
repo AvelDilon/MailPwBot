@@ -20,6 +20,7 @@ namespace PwBot
         {
             Instance = this;
             InitializeComponent();
+            TrayIcon.Visible = false;
             OFS.Init();
             ScanClients();
             DrawAccs();
@@ -56,19 +57,34 @@ namespace PwBot
 
         public void DrawAccs()
         {
+            ToolStripMenuItem RTM = TrayMenu.Items["RunTrayMenu"] as ToolStripMenuItem;
             ImageList IL = new ImageList();
             IL.ImageSize = new Size(64, 64);
             IL.ColorDepth = ColorDepth.Depth32Bit;
             PIL.LargeImageList = IL;
             PIL.Items.Clear();
+            RTM.DropDownItems.Clear();
             foreach (GameAccount acc in AutoLogin.GetAccs())
             {
-                IL.Images.Add(Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + acc.icon));
+                Image ii = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + acc.icon);
+                IL.Images.Add(ii);
                 ListViewItem item = new ListViewItem();
                 item.ImageIndex = IL.Images.Count - 1;
                 item.Text = acc.name;
                 PIL.Items.Add(item);
+                RTM.DropDownItems.Add(acc.name, ii, TrayRun);
             }
+        }
+
+        private void TrayRun(object sender, EventArgs e)
+        {
+            foreach (GameAccount acc in AutoLogin.GetAccs())
+                if (acc.name.Equals(sender.ToString()))
+                {
+                    AutoLogin ALI = new AutoLogin(acc.id);
+                    ALI.Force = false;
+                    ALI.ThreadRun();
+                }
         }
 
         private void AddAcc_Click(object sender, EventArgs e)
@@ -218,6 +234,28 @@ namespace PwBot
                     LF.Top = Top;
                     LF.ShowDialog();
                 }
+        }
+
+        private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            TrayIcon.Visible = false;
+            this.ShowInTaskbar = true;
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void PwBot_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+                TrayIcon.Visible = true;
+                DrawAccs();
+            }
+        }
+
+        private void BotClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

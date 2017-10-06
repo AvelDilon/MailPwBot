@@ -53,11 +53,16 @@
             this.SetClient = new System.Windows.Forms.Button();
             this.AddAcc = new System.Windows.Forms.Button();
             this.TC1 = new System.Windows.Forms.TabControl();
+            this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.TrayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.BotClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.RunTrayMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ALCM.SuspendLayout();
             this.ZB.SuspendLayout();
             this.TP2.SuspendLayout();
             this.ALP.SuspendLayout();
             this.TC1.SuspendLayout();
+            this.TrayMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // PRS
@@ -87,26 +92,26 @@
             this.AccEdit,
             this.AccDel});
             this.ALCM.Name = "ALCM";
-            this.ALCM.Size = new System.Drawing.Size(153, 92);
+            this.ALCM.Size = new System.Drawing.Size(129, 70);
             // 
             // AccAdd
             // 
             this.AccAdd.Name = "AccAdd";
-            this.AccAdd.Size = new System.Drawing.Size(152, 22);
+            this.AccAdd.Size = new System.Drawing.Size(128, 22);
             this.AccAdd.Text = "Добавить";
             this.AccAdd.Click += new System.EventHandler(this.AccAdd_Click);
             // 
             // AccEdit
             // 
             this.AccEdit.Name = "AccEdit";
-            this.AccEdit.Size = new System.Drawing.Size(152, 22);
+            this.AccEdit.Size = new System.Drawing.Size(128, 22);
             this.AccEdit.Text = "Изменить";
             this.AccEdit.Click += new System.EventHandler(this.AccEdit_Click);
             // 
             // AccDel
             // 
             this.AccDel.Name = "AccDel";
-            this.AccDel.Size = new System.Drawing.Size(152, 22);
+            this.AccDel.Size = new System.Drawing.Size(128, 22);
             this.AccDel.Text = "Удалить";
             this.AccDel.Click += new System.EventHandler(this.AccDel_Click);
             // 
@@ -302,6 +307,35 @@
             this.TC1.Size = new System.Drawing.Size(365, 346);
             this.TC1.TabIndex = 5;
             // 
+            // TrayIcon
+            // 
+            this.TrayIcon.ContextMenuStrip = this.TrayMenu;
+            this.TrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("TrayIcon.Icon")));
+            this.TrayIcon.Text = "PW BOT";
+            this.TrayIcon.Visible = true;
+            this.TrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TrayIcon_MouseDoubleClick);
+            // 
+            // TrayMenu
+            // 
+            this.TrayMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RunTrayMenu,
+            this.BotClose});
+            this.TrayMenu.Name = "TrayMenu";
+            this.TrayMenu.Size = new System.Drawing.Size(158, 70);
+            // 
+            // BotClose
+            // 
+            this.BotClose.Name = "BotClose";
+            this.BotClose.Size = new System.Drawing.Size(157, 22);
+            this.BotClose.Text = "Закрыть Бота";
+            this.BotClose.Click += new System.EventHandler(this.BotClose_Click);
+            // 
+            // RunTrayMenu
+            // 
+            this.RunTrayMenu.Name = "RunTrayMenu";
+            this.RunTrayMenu.Size = new System.Drawing.Size(157, 22);
+            this.RunTrayMenu.Text = "Запустить игру";
+            // 
             // PwBot
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -319,6 +353,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PWS_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PWS_KeyDown);
             this.Move += new System.EventHandler(this.PWS_Move);
+            this.Resize += new System.EventHandler(this.PwBot_Resize);
             this.ALCM.ResumeLayout(false);
             this.ZB.ResumeLayout(false);
             this.ZB.PerformLayout();
@@ -326,6 +361,7 @@
             this.TP2.PerformLayout();
             this.ALP.ResumeLayout(false);
             this.TC1.ResumeLayout(false);
+            this.TrayMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -354,6 +390,10 @@
         private System.Windows.Forms.Button SetClient;
         private System.Windows.Forms.Button AddAcc;
         private System.Windows.Forms.TabControl TC1;
+        private System.Windows.Forms.NotifyIcon TrayIcon;
+        private System.Windows.Forms.ContextMenuStrip TrayMenu;
+        private System.Windows.Forms.ToolStripMenuItem BotClose;
+        private System.Windows.Forms.ToolStripMenuItem RunTrayMenu;
     }
 }
 
