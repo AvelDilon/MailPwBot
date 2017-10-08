@@ -131,8 +131,7 @@ namespace PwBot
                 try
                 {
                     ICON = OFD.SafeFileName;
-                    Image i = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + ICON);
-                    pictureBox1.Image = i;
+                    pictureBox1.Image = Utils.LoadImage(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + ICON, 64, 64);
                 } catch { };
             }
         }
