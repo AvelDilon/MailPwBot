@@ -264,6 +264,7 @@ namespace PwBot
                 a.PERS_ID = r.pers_num;
                 O.Add(a);
             }
+            O.Sort(delegate(GameAccount x, GameAccount y) { return x.name.CompareTo(y.name); });
             return O;
         }
 

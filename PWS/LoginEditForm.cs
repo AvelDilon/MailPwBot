@@ -25,7 +25,8 @@ namespace PwBot
             DES.Text = acc.name;
             PNU.Text = acc.PERS_ID.ToString();
             ID = acc.id;
-            pictureBox1.Image = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + acc.icon);
+            ICON = acc.icon;
+            pictureBox1.Image = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + ICON);
         }
 
         private void AddButton_Click(object sender, EventArgs e)

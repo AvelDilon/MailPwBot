@@ -55,8 +55,8 @@
             this.TC1 = new System.Windows.Forms.TabControl();
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.TrayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.BotClose = new System.Windows.Forms.ToolStripMenuItem();
             this.RunTrayMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.BotClose = new System.Windows.Forms.ToolStripMenuItem();
             this.ALCM.SuspendLayout();
             this.ZB.SuspendLayout();
             this.TP2.SuspendLayout();
@@ -254,7 +254,7 @@
             this.ALP.Location = new System.Drawing.Point(4, 22);
             this.ALP.Margin = new System.Windows.Forms.Padding(0);
             this.ALP.Name = "ALP";
-            this.ALP.Size = new System.Drawing.Size(357, 320);
+            this.ALP.Size = new System.Drawing.Size(357, 343);
             this.ALP.TabIndex = 4;
             this.ALP.Text = "AutoLogin";
             // 
@@ -268,7 +268,7 @@
             this.PIL.MultiSelect = false;
             this.PIL.Name = "PIL";
             this.PIL.ShowGroups = false;
-            this.PIL.Size = new System.Drawing.Size(357, 281);
+            this.PIL.Size = new System.Drawing.Size(357, 304);
             this.PIL.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.PIL.TabIndex = 0;
             this.PIL.UseCompatibleStateImageBehavior = false;
@@ -276,7 +276,7 @@
             // 
             // SetClient
             // 
-            this.SetClient.Location = new System.Drawing.Point(3, 294);
+            this.SetClient.Location = new System.Drawing.Point(3, 317);
             this.SetClient.Name = "SetClient";
             this.SetClient.Size = new System.Drawing.Size(134, 23);
             this.SetClient.TabIndex = 10;
@@ -286,7 +286,7 @@
             // 
             // AddAcc
             // 
-            this.AddAcc.Location = new System.Drawing.Point(220, 294);
+            this.AddAcc.Location = new System.Drawing.Point(220, 317);
             this.AddAcc.Name = "AddAcc";
             this.AddAcc.Size = new System.Drawing.Size(134, 23);
             this.AddAcc.TabIndex = 8;
@@ -304,7 +304,7 @@
             this.TC1.Name = "TC1";
             this.TC1.Padding = new System.Drawing.Point(0, 0);
             this.TC1.SelectedIndex = 0;
-            this.TC1.Size = new System.Drawing.Size(365, 346);
+            this.TC1.Size = new System.Drawing.Size(365, 369);
             this.TC1.TabIndex = 5;
             // 
             // TrayIcon
@@ -321,7 +321,13 @@
             this.RunTrayMenu,
             this.BotClose});
             this.TrayMenu.Name = "TrayMenu";
-            this.TrayMenu.Size = new System.Drawing.Size(158, 70);
+            this.TrayMenu.Size = new System.Drawing.Size(158, 48);
+            // 
+            // RunTrayMenu
+            // 
+            this.RunTrayMenu.Name = "RunTrayMenu";
+            this.RunTrayMenu.Size = new System.Drawing.Size(157, 22);
+            this.RunTrayMenu.Text = "Запустить игру";
             // 
             // BotClose
             // 
@@ -330,17 +336,11 @@
             this.BotClose.Text = "Закрыть Бота";
             this.BotClose.Click += new System.EventHandler(this.BotClose_Click);
             // 
-            // RunTrayMenu
-            // 
-            this.RunTrayMenu.Name = "RunTrayMenu";
-            this.RunTrayMenu.Size = new System.Drawing.Size(157, 22);
-            this.RunTrayMenu.Text = "Запустить игру";
-            // 
             // PwBot
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.GrayText;
-            this.ClientSize = new System.Drawing.Size(384, 400);
+            this.ClientSize = new System.Drawing.Size(384, 423);
             this.Controls.Add(this.TC1);
             this.Controls.Add(this.SCAN);
             this.Controls.Add(this.PRS);

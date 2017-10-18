@@ -238,9 +238,12 @@ namespace PwBot
 
         private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            TrayIcon.Visible = false;
-            this.ShowInTaskbar = true;
-            WindowState = FormWindowState.Normal;
+            if (WindowState == FormWindowState.Minimized)
+            {
+                TrayIcon.Visible = false;
+                this.ShowInTaskbar = true;
+                WindowState = FormWindowState.Normal;
+            }
         }
 
         private void PwBot_Resize(object sender, EventArgs e)
