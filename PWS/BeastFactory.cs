@@ -212,7 +212,7 @@ namespace PwBot
                 foreach (Beast B in MY.Values)
                     if (B.ItemId == iid)
                     {
-                        B.NeedImprove = (BIL[iid].count >= Beast.IMPROVE_TABLE[B.Level - 1]);
+                        B.NeedImprove = BIL[iid].count >= Beast.IMPROVE_TABLE[B.Level - 1] && Beast.IMPROVE_TABLE[B.Level - 1] > -1;
                         find = true;
                         break;
                     }

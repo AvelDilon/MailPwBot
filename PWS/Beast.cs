@@ -12,7 +12,7 @@ namespace PwBot
         public static int ITEM_BASE = 50938;
         public static int MIN_ITEM = 682;
         public static int MAX_ITEM = 718;
-        public static int[] IMPROVE_TABLE = new int[] { 2, 4, 10, 20, 50, 100, 200, 400 };
+        public static int[] IMPROVE_TABLE = new int[] { 2, 4, 10, 20, 50, 100, 200, 400, -1 };
 
         public int ID;
         public int ID2;
