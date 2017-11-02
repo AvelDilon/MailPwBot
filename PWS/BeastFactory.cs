@@ -48,14 +48,9 @@ namespace PwBot
             if (SkipBattles)
             {
                 if (CHR.WND.WaitForWindow("Win_HomePetPrepare", 10))
-                {
-                    Utils.RandomDelay(800, 1200);
                     CHR.WND.Click("Win_HomePetPrepare", "Btn_Skip");
-                }
             }
-            else
-                CHR.WND.WaitForWindow("Win_HomePetPrepare", 60, true, false);
-            if (CHR.WND.WaitForWindow("Win_HomePetFirstAward", 10))
+            if (CHR.WND.WaitForWindow("Win_HomePetFirstAward", SkipBattles ? 10 : 60))
             {
                 GetPrizeBag();
                 CHR.WND.Click("Win_HomePetFirstAward", "Btn_Close");

@@ -37,7 +37,6 @@
             this.AccEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.AccDel = new System.Windows.Forms.ToolStripMenuItem();
             this.ZB = new System.Windows.Forms.TabPage();
-            this.SkipBattles = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.PointLimit = new System.Windows.Forms.TextBox();
             this.OBCB = new System.Windows.Forms.CheckBox();
@@ -117,7 +116,6 @@
             // 
             // ZB
             // 
-            this.ZB.Controls.Add(this.SkipBattles);
             this.ZB.Controls.Add(this.label4);
             this.ZB.Controls.Add(this.PointLimit);
             this.ZB.Controls.Add(this.OBCB);
@@ -125,20 +123,10 @@
             this.ZB.Location = new System.Drawing.Point(4, 22);
             this.ZB.Margin = new System.Windows.Forms.Padding(0);
             this.ZB.Name = "ZB";
-            this.ZB.Size = new System.Drawing.Size(357, 320);
+            this.ZB.Size = new System.Drawing.Size(357, 343);
             this.ZB.TabIndex = 2;
             this.ZB.Text = "Звери";
             this.ZB.UseVisualStyleBackColor = true;
-            // 
-            // SkipBattles
-            // 
-            this.SkipBattles.AutoSize = true;
-            this.SkipBattles.Location = new System.Drawing.Point(58, 43);
-            this.SkipBattles.Name = "SkipBattles";
-            this.SkipBattles.Size = new System.Drawing.Size(189, 17);
-            this.SkipBattles.TabIndex = 4;
-            this.SkipBattles.Text = "Пропускать бои (иногда падает)";
-            this.SkipBattles.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -192,7 +180,7 @@
             this.TP2.Location = new System.Drawing.Point(4, 22);
             this.TP2.Margin = new System.Windows.Forms.Padding(0);
             this.TP2.Name = "TP2";
-            this.TP2.Size = new System.Drawing.Size(357, 320);
+            this.TP2.Size = new System.Drawing.Size(357, 343);
             this.TP2.TabIndex = 1;
             this.TP2.Text = "Джин";
             // 
@@ -374,7 +362,6 @@
         private System.Windows.Forms.ToolStripMenuItem AccEdit;
         private System.Windows.Forms.ToolStripMenuItem AccAdd;
         private System.Windows.Forms.TabPage ZB;
-        private System.Windows.Forms.CheckBox SkipBattles;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox PointLimit;
         private System.Windows.Forms.CheckBox OBCB;
