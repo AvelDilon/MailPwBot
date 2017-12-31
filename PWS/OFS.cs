@@ -23,8 +23,7 @@ namespace PwBot
         public static void Init()
         {
             Empty();
-            //TODO: DEBUG
-            //if (!ReadFromWeb())
+            if (!ReadFromWeb())
                 ReadLocalFile();
             BA = GetInt("BA");
             PA = GetInt("SendPacket");
