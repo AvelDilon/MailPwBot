@@ -258,10 +258,13 @@ namespace PwBot
                     return false;
                 LoadAllWindows();
                 if (!(NeedOpen ^ IsWindowOpen(name, strict)))
+                {
+                    Utils.Delay(500);
                     return true;
+                }
                 if (DateTime.Now.CompareTo(WU) > 0)
                     return false;
-                Utils.Delay(sec * 10);
+                Utils.Delay(200);
             }
         }
 
