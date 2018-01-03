@@ -25,7 +25,7 @@ namespace PwBot
 
         public FairyItem LoadEquipedFairy()
         {
-            id = Memory.RD(CHR.HNDL, "BA+GA_OFS+PlayerStruct+Player_EqFairyId");
+            id  = Memory.RD(CHR.HNDL, "BA+GA_OFS+PlayerStruct+Player_EqFairy_Arr+Player_EqFairy_Id");
             lvl = Memory.RD(CHR.HNDL, "BA+GA_OFS+PlayerStruct+Player_EqFairy_Arr+Player_EqFairy_Lvl");
             fsc = Memory.RD(CHR.HNDL, "BA+GA_OFS+PlayerStruct+Player_EqFairy_Arr+Player_EqFairy_FSC");
             P1 = lvl < 10 ? 0 : fsc - lvl + 1;

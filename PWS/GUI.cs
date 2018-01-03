@@ -61,59 +61,6 @@ namespace PwBot
 
         public WindowControl(GameWindow WND) { this.WND = WND; }
 
-        public bool Click_Critical()
-        {
-            int CtrlNamePtr = CN.Trim().Length > 0 ? CP : (name.Trim().Length > 0 ? name_ptr : -1);
-            if (CtrlNamePtr == -1)
-                return false;
-            byte[] WP =
-            {
-                0x60,                                   // PUSHAH
-                0x68, 0x00, 0x00, 0x00, 0x00,           // push NTDLL_CriticalSectionPtr
-                0xFF, 0x15, 0x00, 0x00, 0x00, 0x00,     // call [NTDLL_EnterCriticalSection]
-                0xBE, 0x00, 0x00, 0x00, 0x00,           // mov esi, WinPtr
-                0x8B, 0x16,                             // mov edx,[esi]
-                0x8B, 0x42, 0x30,                       // mov eax,[edx + 30]
-                0x68, 0x00, 0x00, 0x00, 0x00,           // push ControlStringPtr
-                0x8B, 0xCE,                             // mov ecx, esi
-                0xFF, 0xD0,                             // call eax
-                0x68, 0x00, 0x00, 0x00, 0x00,           // push NTDLL_CriticalSectionPtr
-                0xFF, 0x15, 0x00, 0x00, 0x00, 0x00,     // call [NTDLL_LeaveCriticalSection]
-                0x61, 0xC3                              // POPAD, RET
-            };
-            Packet P = new Packet(WND.HNDL, WP);
-            P.Copy(OFS.GetUInt("NTDLL_CriticalSectionPtr"), 2, 4);
-            P.Copy(OFS.GetUInt("NTDLL_CriticalSectionPtr"), 32, 4);
-            P.Copy(OFS.GetUInt("NTDLL_EnterCriticalSection"), 8, 4);
-            P.Copy(OFS.GetUInt("NTDLL_LeaveCriticalSection"), 38, 4);
-            P.Copy(WND.ptr, 13, 4);
-            P.Copy(CtrlNamePtr, 23, 4);
-            return P.Execute();
-        }
-
-        public bool Click2()
-        {
-            int CtrlNamePtr = CN.Trim().Length > 0 ? CP : (name.Trim().Length > 0 ? name_ptr : -1);
-            if (CtrlNamePtr == -1)
-                return false;
-            byte[] WP =
-            {
-                    0x60,                                   // PUSHAH
-                    0xBE, 0x00, 0x00, 0x00, 0x00,           // mov esi, WinPtr
-                    0x8B, 0x16,                             // mov edx,[esi]
-                    0x8B, 0x42, 0x30,                       // mov eax,[edx + 30]
-                    0xBD, 0x00, 0x00, 0x00, 0x00,           // mov ebp, ControlStringPtr
-                    0x55,                                   // push ebp
-                    0x8B, 0xCE,                             // mov ecx, esi
-                    0xFF, 0xD0,                             // call eax
-                    0x61, 0xC3                              // POPAD, RET
-            };
-            Packet P = new Packet(WND.HNDL, WP);
-            P.Copy(WND.ptr, 2, 4);
-            P.Copy(CtrlNamePtr, 12, 4);
-            return P.Execute();
-        }
-
         public bool Click()
         {
             String CtrlName = CN.Trim().Length > 0 ? CN : (name.Trim().Length > 0 ? name : null);
@@ -268,7 +215,7 @@ namespace PwBot
             }
         }
 
-        public Boolean Click(String window, String control, Boolean Crit = false)
+        public Boolean Click(String window, String control)
         {
             LoadAllWindows();
             foreach (GameWindow w in WL)
@@ -276,7 +223,7 @@ namespace PwBot
                 {
                     foreach (WindowControl c in w.CL)
                         if (c.name.Trim().Equals(control) || c.CN.Trim().Equals(control))
-                            return Crit ? c.Click_Critical() : c.Click();
+                            c.Click();
                     break;
                 }
             return false;
