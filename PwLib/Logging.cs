@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PwLib
 {
-    class Logging
+    public class Logging
     {
         private static String LF = @"log.txt";
         private static Boolean busy = false;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PwLib
 {
-    class Packet : AsmCode<Packet>
+    public class Packet : AsmCode<Packet>
     {
         public Packet(int HNDL, byte[] data) : base(HNDL, data) { }
         public Packet(int HNDL, string data) : base(HNDL, data) { }

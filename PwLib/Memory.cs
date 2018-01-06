@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PwLib
 {
-    class Memory
+    public class Memory
     {
         public static int WD(int HNDL, int PTR, int value)
         {
