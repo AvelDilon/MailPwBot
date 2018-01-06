@@ -146,9 +146,6 @@
     <None Include="app.manifest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="OFS.ini">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -222,7 +219,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PwLib\PwLib\PwLib.csproj">
+    <ProjectReference Include="..\PwLib\PwLib.csproj">
       <Project>{7ce2758a-3167-4c45-863f-085bcd653cf9}</Project>
       <Name>PwLib</Name>
     </ProjectReference>
