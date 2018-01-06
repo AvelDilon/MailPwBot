@@ -7,9 +7,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace PwBot
+namespace PwLib
 {
-    class Web
+    public class Web
     {
         public static String UA = "User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Downloader/12590 MailRuGameCenter/1259 Safari/537.36";
         public static CookieContainer CC = new CookieContainer();
@@ -133,10 +133,10 @@ namespace PwBot
             w.SplitOnBlocks("</tr>");
             foreach (String rr in w.ParseBlocks("<td class=\"sell[^\"]*\">([0-9 ]+)</td>", CharName))
                 try { SM.Add(Convert.ToInt32(rr.Replace(" ", "").Trim())); }
-                catch(Exception e) { Debug.LOG("ERROR: " + e.ToString());  continue; }
+                catch(Exception e) { Logging.Log("ERROR: " + e.ToString());  continue; }
             foreach (String rr in w.ParseBlocks("<td class=\"buy[^\"]*\">([0-9 ]+)</td>", CharName))
                 try { BM.Add(Convert.ToInt32(rr.Replace(" ", "").Trim())); }
-                catch (Exception e) { Debug.LOG("ERROR: " + e.ToString()); continue; }
+                catch (Exception e) { Logging.Log("ERROR: " + e.ToString()); continue; }
             int[][] RA = new int[3][];
             try
             {

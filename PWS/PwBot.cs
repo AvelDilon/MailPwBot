@@ -10,6 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using PwLib;
+
 namespace PwBot
 {
     public partial class PwBot : Form
@@ -67,12 +69,12 @@ namespace PwBot
             foreach (GameAccount acc in AutoLogin.GetAccs())
             {
                 Image ii = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + acc.icon);
-                IL.Images.Add(Utils.ScaleImage(ii, 64, 64));
+                IL.Images.Add(LU.ScaleImage(ii, 64, 64));
                 ListViewItem item = new ListViewItem();
                 item.ImageIndex = IL.Images.Count - 1;
                 item.Text = acc.name;
                 PIL.Items.Add(item);
-                RTM.DropDownItems.Add(acc.name, Utils.ScaleImage(ii, 16, 16), TrayRun);
+                RTM.DropDownItems.Add(acc.name, LU.ScaleImage(ii, 16, 16), TrayRun);
             }
         }
 
@@ -106,7 +108,7 @@ namespace PwBot
                 else
                 {
                     DW.Show();
-                    DW.Left = Left + Width - 2 * Utils.GetOS_X_Fix();
+                    DW.Left = Left + Width - 2 * LU.GetOS_X_Fix();
                     DW.Top = Top;
                 }
             }
@@ -126,7 +128,7 @@ namespace PwBot
             if (!this.ContainsFocus)
                 return;
             Debug DW = Debug.GetInctance();
-            DW.Left = Left + Width - 2 * Utils.GetOS_X_Fix();
+            DW.Left = Left + Width - 2 * LU.GetOS_X_Fix();
             DW.Top = Top;
         }
 

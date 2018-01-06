@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PwBot
+namespace PwLib
 {
-    class EF
+    public class EF
     {
         [DllImport("kernel32.dll")]
         public static extern int ReadProcessMemory(int hProcess, int lpBaseAddress, byte[] buffer, int size, ref int lpNumberOfBytesRead);

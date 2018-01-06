@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PwBot
+namespace PwLib
 {
     public class GameWindow
     {
@@ -123,7 +123,7 @@ namespace PwBot
                 }
                 catch (Exception e)
                 {
-                    Debug.LOG(e.ToString());
+                    Logging.Log(e.ToString());
                     break;
                 }
             }
@@ -145,7 +145,7 @@ namespace PwBot
                 }
                 catch (Exception e)
                 {
-                    Debug.LOG(e.ToString());
+                    Logging.Log(e.ToString());
                     break;
                 }
             }
@@ -169,7 +169,7 @@ namespace PwBot
                     }
                     catch (Exception e)
                     {
-                        Debug.LOG(e.ToString());
+                        Logging.Log(e.ToString());
                         break;
                     }
                 }

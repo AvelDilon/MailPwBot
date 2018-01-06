@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PwBot
+namespace PwLib
 {
     public class AsmCode<T> where T: AsmCode<T>
     {
@@ -40,13 +40,6 @@ namespace PwBot
             for (int i = 0; i < ss.Length; i++)
                 bytes[i] = Convert.ToByte(ss[i], 16);
             return bytes;
-        }
-
-        public void DeBug()
-        {
-            Debug.LOG("-===== CODE DEBUG =====-");
-            Debug.LOG("LENGTH: " + CD.LENGTH);
-            Debug.LOG("DATA: " + BitConverter.ToString(CD.DATA));
         }
 
         public T Copy(byte[] data, int offset, int byte_count) { Buffer.BlockCopy(data, 0, CD.DATA, offset, byte_count); return (T)this; }

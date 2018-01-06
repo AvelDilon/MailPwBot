@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using PwLib;
+
 namespace PwBot
 {
     public partial class Debug : Form
@@ -191,7 +193,7 @@ namespace PwBot
             PwBot MWI = PwBot.Instance;
             if (MWI == null)
                 return;
-            MWI.Left = Left - MWI.Width + 2 * Utils.GetOS_X_Fix();
+            MWI.Left = Left - MWI.Width + 2 * LU.GetOS_X_Fix();
             MWI.Top = Top;
         }
 

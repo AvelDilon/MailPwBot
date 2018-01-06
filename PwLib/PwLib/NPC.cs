@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PwBot
+namespace PwLib
 {
     public class NPC
     {
@@ -46,9 +46,9 @@ namespace PwBot
             new Packet(HNDL, "23-00-00-00-00-00").Copy(wid, 2, 4).Send();
         }
 
-        public void UseSkill(Skill SK)
+        public void UseSkill(int id)
         {
-            new Packet(HNDL, "29-00-2B-01-00-00-00-01-F9-16-10-80").Copy(SK.id, 2, 4).Copy(wid, 8, 4).Send();
+            new Packet(HNDL, "29-00-2B-01-00-00-00-01-F9-16-10-80").Copy(id, 2, 4).Copy(wid, 8, 4).Send();
         }
 
         public void PetAttack()

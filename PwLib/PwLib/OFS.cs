@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace PwBot
+namespace PwLib
 {
-    class OFS
+    public class OFS
     {
         private static Dictionary<String, String> OFSL = new Dictionary<String, String>();
 

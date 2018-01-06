@@ -13,6 +13,8 @@ using System.Windows.Forms;
 using System.Xml;
 using static PwBot.PwDataSet;
 
+using PwLib;
+
 namespace PwBot
 {
     public class GameAccount
@@ -199,7 +201,7 @@ namespace PwBot
 
         public void ImproveWindow(IntPtr WP)
         {
-            int fix = Utils.GetOS_X_Fix();
+            int fix = LU.GetOS_X_Fix();
             EF.MoveWindow(WP, -fix, 0, Screen.PrimaryScreen.WorkingArea.Width + 2 * fix, Screen.PrimaryScreen.WorkingArea.Height + fix, true);
             EF.SetWindowText(WP, ACC_DESC);
         }

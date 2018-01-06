@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PwBot
+namespace PwLib
 {
-    class THH
+    public class THH
     {
         public static Dictionary<String, Thread> THL = new Dictionary<String, Thread>();
 
