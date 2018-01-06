@@ -46,7 +46,7 @@ namespace PwLib
 
         public static Boolean ReadFromWeb()
         {
-            Web wr = new Web("https://raw.githubusercontent.com/AvelDilon/MailPwBot/master/PWS/OFS.ini");
+            Web wr = new Web("https://raw.githubusercontent.com/AvelDilon/MailPwBot/master/PwLib/OFS.ini");
             wr.Get().SplitOnBlocks("\n");
             Dictionary<String, String> OL = new Dictionary<String, String>();
             foreach(String L in wr.blocks)
