@@ -43,6 +43,7 @@
             this.TV2 = new System.Windows.Forms.TextBox();
             this.TV3 = new System.Windows.Forms.TextBox();
             this.MoveChar = new System.Windows.Forms.Button();
+            this.ShInv = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LTB
@@ -74,9 +75,9 @@
             // 
             this.TEST.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.TEST.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TEST.Location = new System.Drawing.Point(13, 431);
+            this.TEST.Location = new System.Drawing.Point(357, 431);
             this.TEST.Name = "TEST";
-            this.TEST.Size = new System.Drawing.Size(207, 23);
+            this.TEST.Size = new System.Drawing.Size(171, 23);
             this.TEST.TabIndex = 3;
             this.TEST.Text = "!! BEAST !!";
             this.TEST.UseVisualStyleBackColor = true;
@@ -209,6 +210,18 @@
             this.MoveChar.UseVisualStyleBackColor = true;
             this.MoveChar.Click += new System.EventHandler(this.Move_Click);
             // 
+            // ShInv
+            // 
+            this.ShInv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ShInv.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.ShInv.Location = new System.Drawing.Point(12, 433);
+            this.ShInv.Name = "ShInv";
+            this.ShInv.Size = new System.Drawing.Size(101, 23);
+            this.ShInv.TabIndex = 16;
+            this.ShInv.Text = "Инвентарь";
+            this.ShInv.UseVisualStyleBackColor = true;
+            this.ShInv.Click += new System.EventHandler(this.ShInv_Click);
+            // 
             // Debug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,6 +229,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(540, 468);
+            this.Controls.Add(this.ShInv);
             this.Controls.Add(this.MoveChar);
             this.Controls.Add(this.TV3);
             this.Controls.Add(this.TV2);
@@ -260,5 +274,6 @@
         private System.Windows.Forms.TextBox TV2;
         private System.Windows.Forms.TextBox TV3;
         private System.Windows.Forms.Button MoveChar;
+        private System.Windows.Forms.Button ShInv;
     }
 }

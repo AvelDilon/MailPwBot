@@ -20,10 +20,10 @@ namespace PwLib
         public static int BA = 0;
         public static int PA = 0;
 
-        public static void Init()
+        public static void Init(Boolean force_local = false)
         {
             Empty();
-            if (!ReadFromWeb())
+            if (force_local || !ReadFromWeb())
                 ReadLocalFile();
             BA = GetInt("BA");
             PA = GetInt("SendPacket");

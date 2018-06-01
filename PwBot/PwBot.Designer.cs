@@ -56,12 +56,16 @@
             this.TrayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.RunTrayMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.BotClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.SBCB = new System.Windows.Forms.CheckBox();
+            this.GenSettings = new System.Windows.Forms.TabPage();
+            this.LOFSF = new System.Windows.Forms.CheckBox();
             this.ALCM.SuspendLayout();
             this.ZB.SuspendLayout();
             this.TP2.SuspendLayout();
             this.ALP.SuspendLayout();
             this.TC1.SuspendLayout();
             this.TrayMenu.SuspendLayout();
+            this.GenSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // PRS
@@ -116,6 +120,7 @@
             // 
             // ZB
             // 
+            this.ZB.Controls.Add(this.SBCB);
             this.ZB.Controls.Add(this.label4);
             this.ZB.Controls.Add(this.PointLimit);
             this.ZB.Controls.Add(this.OBCB);
@@ -287,6 +292,7 @@
             this.TC1.Controls.Add(this.ALP);
             this.TC1.Controls.Add(this.TP2);
             this.TC1.Controls.Add(this.ZB);
+            this.TC1.Controls.Add(this.GenSettings);
             this.TC1.Location = new System.Drawing.Point(10, 45);
             this.TC1.Margin = new System.Windows.Forms.Padding(0);
             this.TC1.Name = "TC1";
@@ -294,6 +300,7 @@
             this.TC1.SelectedIndex = 0;
             this.TC1.Size = new System.Drawing.Size(365, 369);
             this.TC1.TabIndex = 5;
+            this.TC1.TabStop = false;
             // 
             // TrayIcon
             // 
@@ -324,6 +331,42 @@
             this.BotClose.Text = "Закрыть Бота";
             this.BotClose.Click += new System.EventHandler(this.BotClose_Click);
             // 
+            // SBCB
+            // 
+            this.SBCB.AutoSize = true;
+            this.SBCB.Checked = true;
+            this.SBCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SBCB.Location = new System.Drawing.Point(58, 43);
+            this.SBCB.Name = "SBCB";
+            this.SBCB.Size = new System.Drawing.Size(107, 17);
+            this.SBCB.TabIndex = 4;
+            this.SBCB.Text = "Пропускать бои";
+            this.SBCB.UseVisualStyleBackColor = true;
+            // 
+            // GenSettings
+            // 
+            this.GenSettings.Controls.Add(this.LOFSF);
+            this.GenSettings.Location = new System.Drawing.Point(4, 22);
+            this.GenSettings.Name = "GenSettings";
+            this.GenSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.GenSettings.Size = new System.Drawing.Size(357, 343);
+            this.GenSettings.TabIndex = 5;
+            this.GenSettings.Text = "Настройки";
+            this.GenSettings.UseVisualStyleBackColor = true;
+            // 
+            // LOFSF
+            // 
+            this.LOFSF.AutoSize = true;
+            this.LOFSF.Checked = true;
+            this.LOFSF.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.LOFSF.Location = new System.Drawing.Point(61, 26);
+            this.LOFSF.Name = "LOFSF";
+            this.LOFSF.Size = new System.Drawing.Size(233, 17);
+            this.LOFSF.TabIndex = 2;
+            this.LOFSF.Text = "Использовать локальный файл офсетов";
+            this.LOFSF.UseVisualStyleBackColor = true;
+            this.LOFSF.CheckedChanged += new System.EventHandler(this.LOFSF_CheckedChanged);
+            // 
             // PwBot
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -350,6 +393,8 @@
             this.ALP.ResumeLayout(false);
             this.TC1.ResumeLayout(false);
             this.TrayMenu.ResumeLayout(false);
+            this.GenSettings.ResumeLayout(false);
+            this.GenSettings.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -381,6 +426,9 @@
         private System.Windows.Forms.ContextMenuStrip TrayMenu;
         private System.Windows.Forms.ToolStripMenuItem BotClose;
         private System.Windows.Forms.ToolStripMenuItem RunTrayMenu;
+        private System.Windows.Forms.CheckBox SBCB;
+        private System.Windows.Forms.TabPage GenSettings;
+        private System.Windows.Forms.CheckBox LOFSF;
     }
 }
 

@@ -55,6 +55,7 @@ namespace PwBot
         {
             LTB.Clear();
             LTB.AppendText("[======= RUN TEST! =======]\r\n");
+            //Client.CC.CHR.MBF.OpenBattle();
             Client.CC.CHR.MBF.LoadMine();
             Client.CC.CHR.MBF.LoadEnemy();
             Beast[] BB = Client.CC.CHR.MBF.AnalizeEnemy();
@@ -227,6 +228,15 @@ namespace PwBot
             Client.CC.CHR.LoadLocation();
             Client.CC.CHR.LOC.Add(0.5F, 0.5F, 0F);
             Client.CC.CHR.Move(Client.CC.CHR.LOC);
+        }
+
+        private void ShInv_Click(object sender, EventArgs e)
+        {
+            LTB.Clear();
+            LTB.AppendText("============== Inventary ============\r\n");
+            Client.CC.CHR.INV.Load();
+            foreach (Item i in Client.CC.CHR.INV.IL)
+                LTB.AppendText("ID: " + i.id + " [" + i.wid.ToString("X4") + "] TYPE=(" + i.type + ") ~~ PLACE: " + i.place + " COUNT: " + i.count + "\r\n");
         }
     }
 }

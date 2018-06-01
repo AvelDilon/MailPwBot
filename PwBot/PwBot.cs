@@ -23,12 +23,16 @@ namespace PwBot
             Instance = this;
             InitializeComponent();
             TrayIcon.Visible = false;
-            OFS.Init();
+            Init();
+        }
+
+        public void Init()
+        {
+            OFS.Init(LOFSF.Checked);
             ScanClients();
             DrawAccs();
         }
-
-        private void ScanClients()
+            private void ScanClients()
         {
             PRS.Items.Clear();
             Client.Init();
@@ -137,7 +141,7 @@ namespace PwBot
             if (BB_RUN.Text.Equals("Запустить"))
             {
                 Client.CC.CHR.MBF.OpenBags = OBCB.Checked;
-                Client.CC.CHR.MBF.SkipBattles = true;
+                Client.CC.CHR.MBF.SkipBattles = SBCB.Checked;
                 try { Client.CC.CHR.MBF.PointLimit = Int32.Parse(PointLimit.Text); } catch { }
                 Client.CC.CHR.MBF.RunBeastBattle();
                 BB_RUN.Text = "Остановить";
@@ -261,6 +265,11 @@ namespace PwBot
         private void BotClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void LOFSF_CheckedChanged(object sender, EventArgs e)
+        {
+            Init();
         }
     }
 }

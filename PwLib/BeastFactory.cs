@@ -27,9 +27,9 @@ namespace PwLib
         public void Run()
         {
             IsRun = true;
-            CHR.EnterHome();
+            /*CHR.EnterHome();
             CHR.WND.WaitForWindow("Win_Chat", 20, false);
-            Utils.RandomDelay();
+            Utils.RandomDelay();*/
             LoadMine();
             Utils.RandomDelay();
             if (GamesRemain < 1 || Points > PointLimit)
@@ -256,7 +256,7 @@ namespace PwLib
                     double ED = EB.Power;
                     MD *= (MB.Enemies & EB.Class) > 0 ? 1.5 : 1.0;
                     ED *= (EB.Enemies & MB.Class) > 0 ? 1.5 : 1.0;
-                    double ElemMult = 1.3;  /// не точно...
+                    double ElemMult = 1.3;  //TODO: не точно...
                     switch (MB.Element)
                     {
                         case 1:
@@ -295,7 +295,7 @@ namespace PwLib
                 }
             }
             Beast[] SA = MY.Values.OrderByDescending(b => b.DAR).ToArray();
-            return new Beast[] { SA[0], SA[1], SA[2] };
+            return SA.Length > 2 ? new Beast[] { SA[0], SA[1], SA[2] } : new Beast[3];
         }
 
         public void OpenBattle()
