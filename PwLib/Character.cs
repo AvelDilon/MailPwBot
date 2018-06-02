@@ -21,7 +21,7 @@ namespace PwLib
         public int ID;
         public int LOC_ID;
         public int LVL;
-        public String LOC_NAME;
+        public String LOC_NAME = "N/A";
         public Location LOC;
 
         public Character(Client CLNT)
@@ -51,7 +51,6 @@ namespace PwLib
         {
             LOC = new Location(Memory.RF(HNDL, CSP + OFS.GetInt("Player_LocX")), Memory.RF(HNDL, CSP + OFS.GetInt("Player_LocY")), Memory.RF(HNDL, CSP + OFS.GetInt("Player_LocZ")));
             LOC_ID = Memory.RD(HNDL, "BA+GA_OFS+MS_OFS+LOCATION_ID");
-            LOC_NAME = Memory.RS(HNDL, "BA+GA_OFS+MS_OFS+LOCATION_NAME+LOCATION_NAME_OFS");
         }
 
         public void TargetOff() { new Packet(HNDL, "08-00").Send(); }

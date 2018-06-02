@@ -27,9 +27,9 @@ namespace PwLib
         public void Run()
         {
             IsRun = true;
-            /*CHR.EnterHome();
+            CHR.EnterHome();
             CHR.WND.WaitForWindow("Win_Chat", 20, false);
-            Utils.RandomDelay();*/
+            Utils.RandomDelay();
             LoadMine();
             Utils.RandomDelay();
             if (GamesRemain < 1 || Points > PointLimit)

@@ -37,6 +37,7 @@
             this.AccEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.AccDel = new System.Windows.Forms.ToolStripMenuItem();
             this.ZB = new System.Windows.Forms.TabPage();
+            this.SBCB = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.PointLimit = new System.Windows.Forms.TextBox();
             this.OBCB = new System.Windows.Forms.CheckBox();
@@ -52,20 +53,19 @@
             this.SetClient = new System.Windows.Forms.Button();
             this.AddAcc = new System.Windows.Forms.Button();
             this.TC1 = new System.Windows.Forms.TabControl();
+            this.GenSettings = new System.Windows.Forms.TabPage();
+            this.LOFSF = new System.Windows.Forms.CheckBox();
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.TrayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.RunTrayMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.BotClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.SBCB = new System.Windows.Forms.CheckBox();
-            this.GenSettings = new System.Windows.Forms.TabPage();
-            this.LOFSF = new System.Windows.Forms.CheckBox();
             this.ALCM.SuspendLayout();
             this.ZB.SuspendLayout();
             this.TP2.SuspendLayout();
             this.ALP.SuspendLayout();
             this.TC1.SuspendLayout();
-            this.TrayMenu.SuspendLayout();
             this.GenSettings.SuspendLayout();
+            this.TrayMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // PRS
@@ -132,6 +132,18 @@
             this.ZB.TabIndex = 2;
             this.ZB.Text = "Звери";
             this.ZB.UseVisualStyleBackColor = true;
+            // 
+            // SBCB
+            // 
+            this.SBCB.AutoSize = true;
+            this.SBCB.Checked = true;
+            this.SBCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SBCB.Location = new System.Drawing.Point(58, 43);
+            this.SBCB.Name = "SBCB";
+            this.SBCB.Size = new System.Drawing.Size(107, 17);
+            this.SBCB.TabIndex = 4;
+            this.SBCB.Text = "Пропускать бои";
+            this.SBCB.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -302,6 +314,28 @@
             this.TC1.TabIndex = 5;
             this.TC1.TabStop = false;
             // 
+            // GenSettings
+            // 
+            this.GenSettings.Controls.Add(this.LOFSF);
+            this.GenSettings.Location = new System.Drawing.Point(4, 22);
+            this.GenSettings.Name = "GenSettings";
+            this.GenSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.GenSettings.Size = new System.Drawing.Size(357, 343);
+            this.GenSettings.TabIndex = 5;
+            this.GenSettings.Text = "Настройки";
+            this.GenSettings.UseVisualStyleBackColor = true;
+            // 
+            // LOFSF
+            // 
+            this.LOFSF.AutoSize = true;
+            this.LOFSF.Location = new System.Drawing.Point(61, 26);
+            this.LOFSF.Name = "LOFSF";
+            this.LOFSF.Size = new System.Drawing.Size(233, 17);
+            this.LOFSF.TabIndex = 2;
+            this.LOFSF.Text = "Использовать локальный файл офсетов";
+            this.LOFSF.UseVisualStyleBackColor = true;
+            this.LOFSF.CheckedChanged += new System.EventHandler(this.LOFSF_CheckedChanged);
+            // 
             // TrayIcon
             // 
             this.TrayIcon.ContextMenuStrip = this.TrayMenu;
@@ -331,42 +365,6 @@
             this.BotClose.Text = "Закрыть Бота";
             this.BotClose.Click += new System.EventHandler(this.BotClose_Click);
             // 
-            // SBCB
-            // 
-            this.SBCB.AutoSize = true;
-            this.SBCB.Checked = true;
-            this.SBCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.SBCB.Location = new System.Drawing.Point(58, 43);
-            this.SBCB.Name = "SBCB";
-            this.SBCB.Size = new System.Drawing.Size(107, 17);
-            this.SBCB.TabIndex = 4;
-            this.SBCB.Text = "Пропускать бои";
-            this.SBCB.UseVisualStyleBackColor = true;
-            // 
-            // GenSettings
-            // 
-            this.GenSettings.Controls.Add(this.LOFSF);
-            this.GenSettings.Location = new System.Drawing.Point(4, 22);
-            this.GenSettings.Name = "GenSettings";
-            this.GenSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.GenSettings.Size = new System.Drawing.Size(357, 343);
-            this.GenSettings.TabIndex = 5;
-            this.GenSettings.Text = "Настройки";
-            this.GenSettings.UseVisualStyleBackColor = true;
-            // 
-            // LOFSF
-            // 
-            this.LOFSF.AutoSize = true;
-            this.LOFSF.Checked = true;
-            this.LOFSF.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.LOFSF.Location = new System.Drawing.Point(61, 26);
-            this.LOFSF.Name = "LOFSF";
-            this.LOFSF.Size = new System.Drawing.Size(233, 17);
-            this.LOFSF.TabIndex = 2;
-            this.LOFSF.Text = "Использовать локальный файл офсетов";
-            this.LOFSF.UseVisualStyleBackColor = true;
-            this.LOFSF.CheckedChanged += new System.EventHandler(this.LOFSF_CheckedChanged);
-            // 
             // PwBot
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -392,9 +390,9 @@
             this.TP2.PerformLayout();
             this.ALP.ResumeLayout(false);
             this.TC1.ResumeLayout(false);
-            this.TrayMenu.ResumeLayout(false);
             this.GenSettings.ResumeLayout(false);
             this.GenSettings.PerformLayout();
+            this.TrayMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
