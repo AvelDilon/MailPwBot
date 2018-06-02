@@ -15,6 +15,7 @@ namespace PwLib
         public static String Get(String key) { return OFSL.ContainsKey(key) ? OFSL[key] : key; }
         public static int GetInt(String key) { return Convert.ToInt32(Get(key), 16); }
         public static uint GetUInt(String key) { return Convert.ToUInt32(Get(key), 16); }
+        public static byte GetByte(String key) { return Convert.ToByte(Get(key), 16); }
         private static void Empty() { OFSL.Clear(); }
 
         public static int BA = 0;

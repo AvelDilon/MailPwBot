@@ -71,7 +71,7 @@ namespace PwLib
                     0x60,                                   // PUSHAH
                     0xBE, 0x00, 0x00, 0x00, 0x00,           // mov esi, WinPtr
                     0x8B, 0x16,                             // mov edx,[esi]
-                    0x8B, 0x42, 0x30,                       // mov eax,[edx + 30]
+                    0x8B, 0x42, 0x00,                       // mov eax,[edx + FUNC_OFSET]
                     0xBD, 0x00, 0x00, 0x00, 0x00,           // mov ebp, ControlStringPtr
                     0x55,                                   // push ebp
                     0x8B, 0xCE,                             // mov ecx, esi
@@ -80,6 +80,7 @@ namespace PwLib
             };
             Packet P = new Packet(WND.HNDL, WP);
             P.Copy(WND.ptr, 2, 4);
+            P.Copy(OFS.GetByte("Gui_Function"), 10, 1);
             byte[] R = P.Execute(Encoding.ASCII.GetBytes(CtrlName), 12);
             return R.Length > 0;
         }
