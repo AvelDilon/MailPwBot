@@ -117,7 +117,7 @@ namespace PwLib
                     w.GF = Memory.RD(CHR.HNDL, Memory.RD(CHR.HNDL, w.ptr) + 0x30);
                     w.name_ptr = Memory.RD(CHR.HNDL, w.ptr + OFS.GetInt("Gui_Win_Name"));
                     w.name = Memory.RS(CHR.HNDL, w.name_ptr, 64, false);
-                    w.visibility = Memory.RD(CHR.HNDL, w.ptr + OFS.GetInt("Gui_Win_Visibility"));
+                    w.visibility = (Memory.RD(CHR.HNDL, w.ptr + OFS.GetInt("Gui_Win_Visibility")) & 1) > 1 ? 1 : 0;
                     w.CL = new List<WindowControl>();
                     WL.Add(w);
                     P = Memory.RD(CHR.HNDL, P);
@@ -206,6 +206,24 @@ namespace PwLib
                     return false;
                 LoadAllWindows();
                 if (!(NeedOpen ^ IsWindowOpen(name, strict)))
+                {
+                    Utils.Delay(500);
+                    return true;
+                }
+                if (DateTime.Now.CompareTo(WU) > 0)
+                    return false;
+                Utils.Delay(200);
+            }
+        }
+
+        public Boolean WaitForCurrentWindow(String name, int sec)
+        {
+            DateTime WU = DateTime.Now.AddSeconds(sec);
+            while (true)
+            {
+                if (!CHR.CLNT.IsRun())
+                    return false;
+                if (CheckCurrentWindow(name))
                 {
                     Utils.Delay(500);
                     return true;

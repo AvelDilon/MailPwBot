@@ -27,9 +27,9 @@ namespace PwLib
         public void Run()
         {
             IsRun = true;
-            CHR.EnterHome();
+            /*CHR.EnterHome();
             CHR.WND.WaitForWindow("Win_Chat", 20, false);
-            Utils.RandomDelay();
+            Utils.RandomDelay();*/
             LoadMine();
             Utils.RandomDelay();
             if (GamesRemain < 1 || Points > PointLimit)
@@ -47,10 +47,10 @@ namespace PwLib
             Utils.RandomDelay();
             if (SkipBattles)
             {
-                if (CHR.WND.WaitForWindow("Win_HomePetPrepare", 10))
+                if (CHR.WND.WaitForCurrentWindow("Win_HomePetPrepare", 10))
                     CHR.WND.Click("Win_HomePetPrepare", "Btn_Skip");
             }
-            if (CHR.WND.WaitForWindow("Win_HomePetFirstAward", SkipBattles ? 10 : 60))
+            if (CHR.WND.WaitForCurrentWindow("Win_HomePetFirstAward", SkipBattles ? 10 : 60))
             {
                 GetPrizeBag();
                 CHR.WND.Click("Win_HomePetFirstAward", "Btn_Close");

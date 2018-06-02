@@ -135,10 +135,10 @@ namespace PwBot
         {
             LTB.Clear();
             LTB.AppendText("============== WINDOWS ============\r\n");
+            Client.CC.CHR.WND.LoadAllWindows();
             foreach (GameWindow w in Client.CC.CHR.WND.WL)
-                if (w.visibility > 0)
                 {
-                    LTB.AppendText("WIN: " + w.name + " ==> [" + w.visibility + "] ~~ " + w.ptr + " (" + w.GF.ToString("X4") + ")\r\n");
+                    LTB.AppendText(w.name + " ==> [" + w.visibility + "] ~~ " + w.ptr + " (" + w.GF.ToString("X4") + ")\r\n");
                     /*foreach (WindowControl c in w.CL)
                         LTB.AppendText("  CNT: " + c.name + " ==> [" + c.CN + "]\r\n");*/
                 }
