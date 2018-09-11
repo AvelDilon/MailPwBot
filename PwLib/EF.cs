@@ -47,5 +47,14 @@ namespace PwLib
 
         [DllImport("user32.dll")]
         public static extern int SetWindowText(IntPtr hWnd, string text);
+
+        [DllImport("user32.dll")]
+        public static extern long GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern int SetWindowLong(IntPtr hWnd, int nIndex, long dwNewLong);
+
+        [DllImport("user32.dll")]
+        public static extern int ShowWindow(IntPtr hWnd, int nCmdShow);
     }
 }

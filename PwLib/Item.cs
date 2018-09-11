@@ -9,7 +9,7 @@ namespace PwLib
     public class Item
     {
         public Character CHR;
-        public enum ItemType { Inventory, Equiped, Loot, BeastInventory }
+        public enum ItemType { Inventory, Equiped, Loot, BeastInventory, Koms }
 
         public int id;
         public uint wid;

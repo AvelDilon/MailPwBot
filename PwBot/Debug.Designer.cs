@@ -44,6 +44,7 @@
             this.TV3 = new System.Windows.Forms.TextBox();
             this.MoveChar = new System.Windows.Forms.Button();
             this.ShInv = new System.Windows.Forms.Button();
+            this.KOM = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LTB
@@ -222,6 +223,18 @@
             this.ShInv.UseVisualStyleBackColor = true;
             this.ShInv.Click += new System.EventHandler(this.ShInv_Click);
             // 
+            // KOM
+            // 
+            this.KOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.KOM.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.KOM.Location = new System.Drawing.Point(119, 431);
+            this.KOM.Name = "KOM";
+            this.KOM.Size = new System.Drawing.Size(101, 23);
+            this.KOM.TabIndex = 17;
+            this.KOM.Text = "KOM";
+            this.KOM.UseVisualStyleBackColor = true;
+            this.KOM.Click += new System.EventHandler(this.KOM_Click);
+            // 
             // Debug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,6 +242,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(540, 468);
+            this.Controls.Add(this.KOM);
             this.Controls.Add(this.ShInv);
             this.Controls.Add(this.MoveChar);
             this.Controls.Add(this.TV3);
@@ -275,5 +289,6 @@
         private System.Windows.Forms.TextBox TV3;
         private System.Windows.Forms.Button MoveChar;
         private System.Windows.Forms.Button ShInv;
+        private System.Windows.Forms.Button KOM;
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="GUI.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Kom.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Logging.cs" />

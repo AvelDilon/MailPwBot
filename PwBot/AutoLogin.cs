@@ -193,17 +193,23 @@ namespace PwBot
             p.Start();
             p.WaitForInputIdle();
             ImproveWindow(p.MainWindowHandle);
-            EnterTheGame();
+            /*EnterTheGame();
             Boolean R = CheckResult();
             if (Force && !R)
-                Run();
+                Run();*/
         }
 
         public void ImproveWindow(IntPtr WP)
         {
-            int fix = LU.GetOS_X_Fix();
-            EF.MoveWindow(WP, -fix, 0, Screen.PrimaryScreen.WorkingArea.Width + 2 * fix, Screen.PrimaryScreen.WorkingArea.Height + fix, true);
+            int fix = LU.GetOS_X_Fix() - 5;
             EF.SetWindowText(WP, ACC_DESC);
+            EF.SetWindowLong(WP, -16, EF.GetWindowLong(WP, -16) & ~0x40000);
+            EF.MoveWindow(WP, -fix, 0, Screen.PrimaryScreen.WorkingArea.Width + 2 * fix, Screen.PrimaryScreen.WorkingArea.Height + fix, true);
+            /*
+            EF.ShowWindow(WP, 6);
+            Utils.Delay(1000);
+            Utils.Delay(1000);
+            EF.ShowWindow(WP, 9);*/
         }
 
         public bool CheckResult()

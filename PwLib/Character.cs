@@ -23,6 +23,7 @@ namespace PwLib
         public int LVL;
         public String LOC_NAME = "N/A";
         public Location LOC;
+        public Kom KO;
 
         public Character(Client CLNT)
         {
@@ -45,6 +46,7 @@ namespace PwLib
             ENV = new Environment(this);
             WND = new GUI(this);
             MBF = new BeastFactory(this);
+            KO = new Kom(this);
         }
 
         public void LoadLocation()
