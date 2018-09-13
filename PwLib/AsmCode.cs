@@ -33,13 +33,23 @@ namespace PwLib
             this.HNDL = HNDL;
         }
 
-        static byte[] STBA(string str)
+        public static byte[] STBA(string str)
         {
             string[] ss = str.Split('-');
             byte[] bytes = new byte[ss.Length];
             for (int i = 0; i < ss.Length; i++)
                 bytes[i] = Convert.ToByte(ss[i], 16);
             return bytes;
+        }
+
+        public static String BATS(byte[] ba)
+        {
+            return BitConverter.ToString(ba);
+        }
+
+        public void Debug()
+        {
+            Logging.Log(BATS(CD.DATA));
         }
 
         public T Copy(byte[] data, int offset, int byte_count) { Buffer.BlockCopy(data, 0, CD.DATA, offset, byte_count); return (T)this; }

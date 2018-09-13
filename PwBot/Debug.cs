@@ -239,22 +239,5 @@ namespace PwBot
                 LTB.AppendText("ID: " + i.id + " [" + i.wid.ToString("X4") + "] TYPE=(" + i.type + ") ~~ PLACE: " + i.place + " COUNT: " + i.count + "\r\n");
         }
 
-        private void KOM_Click(object sender, EventArgs e)
-        {
-            Client.CC.CHR.KO.Load();
-            LTB.Clear();
-            LTB.AppendText("============== KOMISSIONER [BUY] ============\r\n");
-            foreach (Item i in Client.CC.CHR.KO.BUY)
-                if (i.id > 0)
-                    LTB.AppendText("ID: " + i.id + " [" + i.wid.ToString("X4") + "] TYPE=(" + i.type + ") ~~ PLACE: " + i.place + " COUNT: " + i.count + "\r\n");
-            LTB.AppendText("============== KOMISSIONER [SELL] ============\r\n");
-            foreach (Item i in Client.CC.CHR.KO.SELL)
-                if (i.id > 0)
-                    LTB.AppendText("ID: " + i.id + " [" + i.wid.ToString("X4") + "] TYPE=(" + i.type + ") ~~ PLACE: " + i.place + " COUNT: " + i.count + "\r\n");
-            LTB.AppendText("============== KOMISSIONER [STORE] ============\r\n");
-            foreach (Item i in Client.CC.CHR.KO.STORE)
-                if (i.id > 0)
-                    LTB.AppendText("ID: " + i.id + " [" + i.wid.ToString("X4") + "] TYPE=(" + i.type + ") ~~ PLACE: " + i.place + " COUNT: " + i.count + "\r\n");
-        }
     }
 }

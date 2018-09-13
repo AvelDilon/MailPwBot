@@ -11,7 +11,6 @@ namespace PwLib
     {
         public static List<Client> CL = new List<Client>();
         public static Client CC = null;
-        public static String SERVER = "drakon";
 
         public int PID = -1;
         public int HNDL;

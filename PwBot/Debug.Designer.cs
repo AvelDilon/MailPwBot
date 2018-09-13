@@ -231,9 +231,8 @@
             this.KOM.Name = "KOM";
             this.KOM.Size = new System.Drawing.Size(101, 23);
             this.KOM.TabIndex = 17;
-            this.KOM.Text = "KOM";
+            this.KOM.Text = "---";
             this.KOM.UseVisualStyleBackColor = true;
-            this.KOM.Click += new System.EventHandler(this.KOM_Click);
             // 
             // Debug
             // 
