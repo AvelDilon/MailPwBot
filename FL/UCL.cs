@@ -56,6 +56,14 @@ namespace FL
             return null;
         }
 
+        public static void ReplaceDefaultDebug(UserControl ruc)
+        {
+            foreach (UCL u in LST.ToArray())
+                if (u.ID == UCDebug.UCID)
+                    LST.Remove(u);
+            LST.Add(new UCL(UCDebug.UCID, "DEBUG", ruc, false));
+        }
+
         public static void ReplaceUC(int id, UserControl u)
         {
             UCL lu = Get(id);

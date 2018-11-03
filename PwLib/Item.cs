@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PwLib
@@ -21,6 +22,8 @@ namespace PwLib
         public int price;
         public Location loc;
         public ItemType IT;
+        public String name = "NULL";
+        public String desc = "NULL";
 
         public Item(Character CHR, int ptr = 0) { this.CHR = CHR; this.ptr = ptr; }
 
@@ -41,6 +44,33 @@ namespace PwLib
             max_count = Memory.RD(CHR.HNDL, ptr + OFS.GetInt("Inventory_Item_MaxCount"));
             price = Memory.RD(CHR.HNDL, ptr + OFS.GetInt("Inventory_Item_Price"));
             IT = ItemType.Inventory;
+            if (id == 0)
+                return;
+            desc = ReadDescription();
+            String[] sa = new Regex("\\^[0-9a-f]{6}").Split(desc);
+            if (sa.Length < 2)
+                return;
+            String ps = sa[1].Trim();
+            name = (ps.IndexOf('(') > 0 ? ps.Substring(0, ps.IndexOf('(')) : ps.Substring(0, ps.IndexOf('\\'))).Trim();
+        }
+
+        private String ReadDescription()
+        {
+            byte[] WP =
+            {
+                0x60,                                       // pushad
+                0xB9, 0x00, 0x00, 0x00, 0x00,               // mov ecx, CELL_PTR
+                0x8B, 0x01,                                 // mov eax, [ecx]
+                0x6A, 0x00,                                 // push 00
+                0xFF, 0x50, 0x40,                           // call [eax + 0x40]
+                0xA3, 0x00, 0x00, 0x00, 0x00,               // [ALLOCATED_MEMORY], eax
+                0x61, 0xC3                                  // popad, ret
+            };
+            Packet P = new Packet(CHR.HNDL, WP);
+            P.Copy(ptr, 2, 4);
+            byte[] RA = new byte[4];
+            RA = P.Execute(RA, 14);
+            return Memory.RS(CHR.HNDL, BitConverter.ToInt32(RA, 0), 2048);
         }
 
         public void Use()
@@ -76,7 +106,7 @@ namespace PwLib
 
         public override String ToString()
         {
-            return "ID: " + id + ", Количество: " + count;
+            return name + " (" + count + ")";
         }
     }
 }
