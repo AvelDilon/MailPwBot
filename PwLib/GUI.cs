@@ -117,7 +117,7 @@ namespace PwLib
                     w.GF = Memory.RD(CHR.HNDL, Memory.RD(CHR.HNDL, w.ptr) + 0x30);
                     w.name_ptr = Memory.RD(CHR.HNDL, w.ptr + OFS.GetInt("Gui_Win_Name"));
                     w.name = Memory.RS(CHR.HNDL, w.name_ptr, 64, false);
-                    w.visibility = (Memory.RD(CHR.HNDL, w.ptr + OFS.GetInt("Gui_Win_Visibility")) & 1) > 1 ? 1 : 0;
+                    w.visibility = Memory.RD(CHR.HNDL, w.ptr + OFS.GetInt("Gui_Win_Visibility"));
                     w.CL = new List<WindowControl>();
                     WL.Add(w);
                     P = Memory.RD(CHR.HNDL, P);
@@ -243,6 +243,18 @@ namespace PwLib
                     foreach (WindowControl c in w.CL)
                         if (c.name.Trim().Equals(control) || c.CN.Trim().Equals(control))
                             c.Click();
+                    break;
+                }
+            return false;
+        }
+
+        public Boolean Open(String window)
+        {
+            LoadAllWindows();
+            foreach (GameWindow w in WL)
+                if (w.name.Equals(window))
+                {
+                    w.OpenWindow();
                     break;
                 }
             return false;

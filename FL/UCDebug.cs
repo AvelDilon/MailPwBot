@@ -1,37 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using PwLib;
 
-namespace PwBot
+namespace FL
 {
-    public partial class Debug : Form
+    public partial class UCDebug : UserControl
     {
-        public static Debug Instance = null;
-
-        public static Debug GetInctance()
-        {
-            if (Instance != null)
-                return Instance;
-            return new Debug();
-        }
-
-        public Debug()
+        public static int UCID = 1000;
+        public UCDebug()
         {
             InitializeComponent();
-            Instance = this;
-        }
-
-        public static void LOG(string msg)
-        {
-            GetInctance().LTB.AppendText(msg + "\r\n");
         }
 
         private void INF_Click(object sender, EventArgs e)
@@ -49,6 +34,16 @@ namespace PwBot
             LTB.AppendText("================================\r\n");
             LTB.AppendText("LOC: " + Client.CC.CHR.LOC_NAME + " [" + Client.CC.CHR.LOC_ID + "]\r\n");
             LTB.AppendText("================================\r\n");
+        }
+
+        private void NPC_Click(object sender, EventArgs e)
+        {
+            LTB.Clear();
+            LTB.AppendText("============== MOBs ============\r\n");
+            Client.CC.CHR.ENV.ScanLoot();
+            foreach (NPC n in Client.CC.CHR.ENV.NPC_LIST)
+                LTB.AppendText(n.id + " [" + n.wid.ToString("X4") + "] (" + n.type + ") ~~ " + n.name +
+                    "\r\n[DIST: " + n.distance + "] [LOC: " + n.LOC.x + "; " + n.LOC.y + "; " + n.LOC.z + "]\r\n");
         }
 
         private void TEST_Click(object sender, EventArgs e)
@@ -109,16 +104,11 @@ namespace PwBot
             LTB.AppendText("[======= INVENTARY! =======]\r\n");
             foreach (BeastItem bi in Client.CC.CHR.MBF.BIL.Values)
             {
-                 LTB.AppendText("ID:" + bi.id + "\r\n");
-                 LTB.AppendText("Count:" + bi.count + "\r\n");
-                 LTB.AppendText("INCUBE:" + bi.NeedIncube + "\r\n");
-                 LTB.AppendText("[========================]\r\n");
+                LTB.AppendText("ID:" + bi.id + "\r\n");
+                LTB.AppendText("Count:" + bi.count + "\r\n");
+                LTB.AppendText("INCUBE:" + bi.NeedIncube + "\r\n");
+                LTB.AppendText("[========================]\r\n");
             }
-        }
-
-        private void Debug_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Instance = null;
         }
 
         private void CurWin_Click(object sender, EventArgs e)
@@ -137,21 +127,11 @@ namespace PwBot
             LTB.AppendText("============== WINDOWS ============\r\n");
             Client.CC.CHR.WND.LoadAllWindows();
             foreach (GameWindow w in Client.CC.CHR.WND.WL)
-                {
-                    LTB.AppendText(w.name + " ==> [" + w.visibility + "] ~~ " + w.ptr + " (" + w.GF.ToString("X4") + ")\r\n");
-                    /*foreach (WindowControl c in w.CL)
-                        LTB.AppendText("  CNT: " + c.name + " ==> [" + c.CN + "]\r\n");*/
-                }
-        }
-
-        private void NPC_Click(object sender, EventArgs e)
-        {
-            LTB.Clear();
-            LTB.AppendText("============== MOBs ============\r\n");
-            Client.CC.CHR.ENV.ScanLoot();
-            foreach (NPC n in Client.CC.CHR.ENV.NPC_LIST)
-                LTB.AppendText(n.id + " [" + n.wid.ToString("X4") + "] (" + n.type + ") ~~ " + n.name +
-                    "\r\n[DIST: " + n.distance + "] [LOC: " + n.LOC.x + "; " + n.LOC.y + "; " + n.LOC.z + "]\r\n");
+            {
+                LTB.AppendText(w.name + " ==> [" + w.visibility + "] ~~ " + w.ptr + " (" + w.GF.ToString("X4") + ")\r\n");
+                /*foreach (WindowControl c in w.CL)
+                    LTB.AppendText("  CNT: " + c.name + " ==> [" + c.CN + "]\r\n");*/
+            }
         }
 
         private void Loot_Click(object sender, EventArgs e)
@@ -163,7 +143,7 @@ namespace PwBot
                 LTB.AppendText(i.DebugString());
         }
 
-        private void KMSS_Click(object sender, EventArgs e)
+        private void EH_Click(object sender, EventArgs e)
         {
             Client.CC.CHR.EnterHome();
         }
@@ -178,27 +158,7 @@ namespace PwBot
             }
         }
 
-        private void Debug_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.Shift && e.KeyCode == Keys.D)
-            {
-                if (Visible)
-                    Hide();
-            }
-        }
-
-        private void Debug_Move(object sender, EventArgs e)
-        {
-            if (!this.ContainsFocus)
-                return;
-            PwBot MWI = PwBot.Instance;
-            if (MWI == null)
-                return;
-            MWI.Left = Left - MWI.Width + 2 * LU.GetOS_X_Fix();
-            MWI.Top = Top;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
+        private void FAIRY_Click(object sender, EventArgs e)
         {
             LTB.Clear();
             LTB.AppendText("============== FAIRY ============\r\n");
@@ -223,7 +183,7 @@ namespace PwBot
             }
         }
 
-        private void Move_Click(object sender, EventArgs e)
+        private void MoveChar_Click(object sender, EventArgs e)
         {
             Client.CC.CHR.LoadLocation();
             Client.CC.CHR.LOC.Add(0.5F, 0.5F, 0F);
@@ -236,8 +196,12 @@ namespace PwBot
             LTB.AppendText("============== Inventary ============\r\n");
             Client.CC.CHR.INV.Load();
             foreach (Item i in Client.CC.CHR.INV.IL)
-                LTB.AppendText("ID: " + i.id + " [" + i.wid.ToString("X4") + "] TYPE=(" + i.type + ") ~~ PLACE: " + i.place + " COUNT: " + i.count + "\r\n");
+                LTB.AppendText("ID: " + i.id + " [" + i.id.ToString("X4") + "] TYPE=(" + i.type + ") ~~ PLACE: " + i.place + " COUNT: " + i.count + "\r\n");
         }
 
+        private void OpenWnd_Click(object sender, EventArgs e)
+        {
+            Client.CC.CHR.WND.Open(TV1.Text);
+        }
     }
 }

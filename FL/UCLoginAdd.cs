@@ -1,17 +1,18 @@
-﻿using PwBot.PwDataSetTableAdapters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PwLib;
+using PwLib.PwDataSetTableAdapters;
 
-namespace PwBot
+namespace FL
 {
-    public partial class LoginAddForm : Form
+    public partial class UCLoginAdd : UserControl
     {
         public static String LGN_DEF = "your@mail.ru";
         public static String PSW_DEF = "пароль";
@@ -19,14 +20,7 @@ namespace PwBot
         public static String DES_DEF = "Антоний";
         public String ICON = "001.png";
 
-        public static LoginAddForm Instance = null;
-
-        public static LoginAddForm GetInstance()
-        {
-            return Instance == null ? new LoginAddForm() : Instance;
-        }
-
-        public LoginAddForm()
+        public UCLoginAdd()
         {
             InitializeComponent();
             SetGrayText(LGN, LGN_DEF);
@@ -34,7 +28,6 @@ namespace PwBot
             SetGrayText(PNU, PNU_DEF);
             SetGrayText(DES, DES_DEF);
             ActiveControl = AddButton;
-            Instance = this;
         }
 
         private void SetGrayText(TextBox TB, String txt)
@@ -110,13 +103,8 @@ namespace PwBot
                 LTA.AddLogin(LGN_R, PSW_R, DES_R, PNU_R, ICON);
             }
             catch { }
-            ((PwBot)Owner).DrawAccs();
-            this.Close();
-        }
-
-        private void LoginAddForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Instance = null;
+            UCL.ReturnUC(UCAL.UCID);
+            FL.UCAL.Instance.DrawAccs();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -132,8 +120,15 @@ namespace PwBot
                 {
                     ICON = OFD.SafeFileName;
                     pictureBox1.Image = LU.LoadImage(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + ICON, 64, 64);
-                } catch { };
+                }
+                catch { };
             }
+        }
+
+        private void la_cancel_Click(object sender, EventArgs e)
+        {
+            UCL.ReturnUC(UCAL.UCID);
+            FL.UCAL.Instance.DrawAccs();
         }
     }
 }

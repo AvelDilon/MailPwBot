@@ -73,5 +73,10 @@ namespace PwLib
         {
             return "ID: " + id + ", WID: " + wid.ToString("X4") + ", TYPE: " + type + (with_loc ? "\r\n" + loc.DebugString() : "\r\n");
         }
+
+        public override String ToString()
+        {
+            return "ID: " + id + ", Количество: " + count;
+        }
     }
 }

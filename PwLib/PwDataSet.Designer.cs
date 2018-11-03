@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace PwBot {
+namespace PwLib {
     
     
     /// <summary>
@@ -1289,7 +1289,7 @@ namespace PwBot {
         }
     }
 }
-namespace PwBot.PwDataSetTableAdapters {
+namespace PwLib.PwDataSetTableAdapters {
     
     
     /// <summary>
@@ -1485,7 +1485,7 @@ namespace PwBot.PwDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::PwBot.Properties.Settings.Default.ShopDBCS;
+            this._connection.ConnectionString = global::PwLib.Properties.Settings.Default.ShopDBCS;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2191,7 +2191,7 @@ namespace PwBot.PwDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::PwBot.Properties.Settings.Default.ShopDBCS;
+            this._connection.ConnectionString = global::PwLib.Properties.Settings.Default.ShopDBCS;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

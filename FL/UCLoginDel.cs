@@ -1,41 +1,36 @@
-﻿using PwBot.PwDataSetTableAdapters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PwLib.PwDataSetTableAdapters;
 
-namespace PwBot
+namespace FL
 {
-    public partial class LoginDeleteForm : Form
+    public partial class UCLoginDel : UserControl
     {
         public String account;
 
-        public LoginDeleteForm()
+        public UCLoginDel(String acc)
         {
             InitializeComponent();
-        }
-
-        public void OpenMe(String account)
-        {
-            this.account = account;
-            DAL.Text = "Удалить аккаунт: <" + account + ">?";
-            ShowDialog();
+            account = acc;
+            DAL.Text = "Удалить аккаунт: <" + acc + ">?";
         }
 
         private void DAB_Click(object sender, EventArgs e)
         {
-            if(account.Length > 0)
+            if (account.Length > 0)
             {
                 LoginTableAdapter LTA = new LoginTableAdapter();
                 LTA.DeleteByDesc(account);
             }
-            ((PwBot)Owner).DrawAccs();
-            this.Close();
+            UCL.ReturnUC(UCAL.UCID);
+            FL.UCAL.Instance.DrawAccs();
         }
     }
 }

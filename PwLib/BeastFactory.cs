@@ -87,6 +87,7 @@ namespace PwLib
 
         public void LoadInventory()
         {
+            CHR.WND.Click("Win_HomePetMain", "Btn_Storage");
             BIL.Clear();
             int rr = -1;
             int BIB = Memory.RD(CHR.HNDL, MBO + OFS.GetInt("BS_InventoryBegin"));
@@ -103,6 +104,7 @@ namespace PwLib
                 BIL.Add(NBI.id, NBI);
                 BIB += OFS.GetInt("BS_InventoryItemSize");
             }
+            CHR.WND.Click("Win_HomePetMain", "Btn_Storage");
         }
 
         public void LoadMyBeastStruct()
@@ -178,10 +180,12 @@ namespace PwLib
 
         public void MoveAllBeastsToStore()
         {
+            CHR.WND.Click("Win_HomePetMain", "Btn_Storage");
             CHR.INV.Load();
             foreach (Item i in CHR.INV.IL)
                 if (i.id >= Beast.ITEM_BASE + Beast.MIN_ITEM && i.id <= Beast.ITEM_BASE + Beast.MAX_ITEM)
                     BeastItem.FromItem(i).PutToBI();
+            CHR.WND.Click("Win_HomePetMain", "Btn_Storage");
         }
 
         public void OpenAllBags()

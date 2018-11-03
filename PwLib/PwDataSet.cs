@@ -1,11 +1,11 @@
-﻿namespace PwBot
+﻿namespace PwLib
 {
     partial class PwDataSet
     {
     }
 }
 
-namespace PwBot.PwDataSetTableAdapters
+namespace PwLib.PwDataSetTableAdapters
 {
     partial class LoginTableAdapter
     {

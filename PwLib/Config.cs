@@ -1,13 +1,13 @@
-﻿using PwBot.PwDataSetTableAdapters;
+﻿using PwLib.PwDataSetTableAdapters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PwBot
+namespace PwLib
 {
-    class Config
+    public class Config
     {
         public static String Get(String var)
         {

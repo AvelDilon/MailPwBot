@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PwBot
+namespace PwLib
 {
-    class LU
+    public class LU
     {
         public static int GetOS_X_Fix()
         {

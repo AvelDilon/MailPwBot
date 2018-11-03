@@ -30,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,10 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsmCode.cs" />
+    <Compile Include="AutoItemOpen.cs" />
+    <Compile Include="AutoLogin.cs" />
     <Compile Include="Beast.cs" />
     <Compile Include="BeastFactory.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="EF.cs" />
     <Compile Include="Environment.cs" />
     <Compile Include="Fairy.cs" />
@@ -54,19 +62,55 @@
     <Compile Include="Level.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Logging.cs" />
+    <Compile Include="LU.cs" />
     <Compile Include="Memory.cs" />
     <Compile Include="NPC.cs" />
     <Compile Include="OFS.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="PwDataSet.cs">
+      <DependentUpon>PwDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PwDataSet.Designer.cs">
+      <DependentUpon>PwDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="THH.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Web.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="OFS.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PwDataSet.xsc">
+      <DependentUpon>PwDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="PwDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PwDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PwDataSet.xss">
+      <DependentUpon>PwDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PwDB.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

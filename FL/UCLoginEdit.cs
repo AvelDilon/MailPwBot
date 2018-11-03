@@ -1,22 +1,23 @@
-﻿using PwBot.PwDataSetTableAdapters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PwLib;
+using PwLib.PwDataSetTableAdapters;
 
-namespace PwBot
+namespace FL
 {
-    public partial class LoginEditForm : Form
+    public partial class UCLoginEdit : UserControl
     {
         private int ID = -1;
         String ICON = "001.png";
 
-        public LoginEditForm(GameAccount acc)
+        public UCLoginEdit(GameAccount acc)
         {
             InitializeComponent();
             ActiveControl = AddButton;
@@ -40,8 +41,8 @@ namespace PwBot
                 LTA.UpdateLogin(LGN.Text, PSW.Text, DES.Text, PNU_R, ICON, ID);
             }
             catch { }
-            ((PwBot)Owner).DrawAccs();
-            this.Close();
+            UCL.ReturnUC(UCAL.UCID);
+            FL.UCAL.Instance.DrawAccs();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -57,8 +58,15 @@ namespace PwBot
                 {
                     ICON = OFD.SafeFileName;
                     pictureBox1.Image = LU.LoadImage(AppDomain.CurrentDomain.BaseDirectory + "icons\\" + ICON, 64, 64);
-                } catch { };
+                }
+                catch { };
             }
+        }
+
+        private void ac_edit_cancel_Click(object sender, EventArgs e)
+        {
+            UCL.ReturnUC(UCAL.UCID);
+            FL.UCAL.Instance.DrawAccs();
         }
     }
 }

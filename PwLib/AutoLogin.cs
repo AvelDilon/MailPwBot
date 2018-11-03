@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using PwBot.PwDataSetTableAdapters;
+using PwLib.PwDataSetTableAdapters;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,11 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using static PwBot.PwDataSet;
+using static PwLib.PwDataSet;
 
-using PwLib;
-
-namespace PwBot
+namespace PwLib
 {
     public class GameAccount
     {
@@ -27,7 +25,7 @@ namespace PwBot
         public int PERS_ID;
     }
 
-    class AutoLogin
+    public class AutoLogin
     {
         public static UInt64 UID1 = 16358179426615842353;
         public static UInt64 UID2 = 6699790601842480689;
