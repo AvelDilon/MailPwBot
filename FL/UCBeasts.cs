@@ -29,17 +29,19 @@ namespace FL
 
         private void BB_RUN_Click(object sender, EventArgs e)
         {
+            BeastFactory BF = Client.CC.CHR.GetClass<BeastFactory>();
             if (BB_RUN.Text.Equals("Запустить"))
             {
-                Client.CC.CHR.MBF.OpenBags = OBCB.Checked;
-                Client.CC.CHR.MBF.SkipBattles = SBCB.Checked;
-                try { Client.CC.CHR.MBF.PointLimit = Int32.Parse(PointLimit.Text); } catch { }
-                Client.CC.CHR.MBF.RunBeastBattle();
+
+                BF.OpenBags = OBCB.Checked;
+                BF.SkipBattles = SBCB.Checked;
+                try { BF.PointLimit = Int32.Parse(PointLimit.Text); } catch { }
+                BF.RunBeastBattle();
                 BB_RUN.Text = "Остановить";
             }
             else
             {
-                Client.CC.CHR.MBF.StopBeastBattle();
+                BF.StopBeastBattle();
                 BB_RUN.Text = "Запустить";
             }
         }
@@ -52,7 +54,7 @@ namespace FL
                 return;
             }
             BB_RUN.Enabled = true;
-            if (Client.CC.CHR.MBF.IsRun)
+            if (Client.CC.CHR.GetClass<BeastFactory>().IsRun)
                 BB_RUN.Text = "Остановить";
             else
                 BB_RUN.Text = "Запустить";

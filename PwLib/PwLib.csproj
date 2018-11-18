@@ -55,16 +55,24 @@
     <Compile Include="Config.cs" />
     <Compile Include="EF.cs" />
     <Compile Include="Environment.cs" />
-    <Compile Include="Fairy.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="ItemBeast.cs" />
+    <Compile Include="ItemEquip.cs" />
+    <Compile Include="FairyFactory.cs" />
     <Compile Include="GUI.cs" />
     <Compile Include="Inventory.cs" />
-    <Compile Include="Item.cs" />
+    <Compile Include="ItemInventory.cs" />
+    <Compile Include="ItemFairy.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Logging.cs" />
+    <Compile Include="ItemLoot.cs" />
     <Compile Include="LU.cs" />
     <Compile Include="Memory.cs" />
-    <Compile Include="NPC.cs" />
+    <Compile Include="PwClass.cs" />
+    <Compile Include="PwMine.cs" />
+    <Compile Include="PwMob.cs" />
+    <Compile Include="PwNpc.cs" />
     <Compile Include="OFS.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,7 +89,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="PwPet.cs" />
+    <Compile Include="PwTargetable.cs" />
+    <Compile Include="PwWorldObject.cs" />
+    <Compile Include="PwObject.cs" />
+    <Compile Include="PwPlayer.cs" />
     <Compile Include="THH.cs" />
+    <Compile Include="UserClassObject.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Web.cs" />
   </ItemGroup>

@@ -38,9 +38,9 @@ namespace FL
             LST.Add(new UCL(UCDebug.UCID, "DEBUG", new UCDebug(), false));
         }
 
-        public static void Add(UserControl u, String name, Boolean visible = true)
+        public static void Add(UserControl u, String name, Boolean visible = true, int id = -1)
         {
-            LST.Add(new UCL(LST.Count, name, u, visible));
+            LST.Add(new UCL(id > 0 ? id : LST.Count, name, u, visible));
         }
 
         public static List<UCL> GetList()
@@ -62,6 +62,11 @@ namespace FL
                 if (u.ID == UCDebug.UCID)
                     LST.Remove(u);
             LST.Add(new UCL(UCDebug.UCID, "DEBUG", ruc, false));
+        }
+
+        public static void AddDebug(UserControl ruc, String name)
+        {
+            LST.Add(new UCL(UCDebug.UCID, name, ruc, false));
         }
 
         public static void ReplaceUC(int id, UserControl u)

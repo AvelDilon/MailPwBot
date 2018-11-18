@@ -6,44 +6,26 @@ using System.Threading.Tasks;
 
 namespace PwLib
 {
-    public class Inventory
+    public class Inventory : UserClassObject
     {
-        public Character CHR;
         private int PTR;
         private int MAX_ITEMS;
-        public List<Item> IL = new List<Item>();
+        public List<ItemInventory> IL = new List<ItemInventory>();
 
-        public Inventory(Character CHR)
-        {
-            this.CHR = CHR;
-            Load();
-        }
-
-        public static List<Item> LoadStruct(Character CHR, int PTR, int MAX_ITEMS)
-        {
-            List<Item> LIL = new List<Item>();
-            for (byte i = 0; i < MAX_ITEMS; i++)
-            {
-                Item ITM = new Item(CHR, Memory.RD(CHR.HNDL, PTR + i * 0x4));
-                ITM.LoadInventoryItem();
-                ITM.place = i;
-                LIL.Add(ITM);
-            }
-            return LIL;
-        }
+        public Inventory(Character CHR) : base(CHR) { Load(); }
 
         public void Load()
         {
             IL.Clear();
             PTR = Memory.RD(CHR.HNDL, "BA+GA_OFS+PlayerStruct+Player_Inventory_Struct");
             MAX_ITEMS = Memory.RD(CHR.HNDL, PTR + OFS.GetInt("Inventory_MaxSize"));
-            IL = LoadStruct(CHR, Memory.RD(CHR.HNDL, PTR + OFS.GetInt("Inventory_Array")), MAX_ITEMS);
+            IL = ItemInventory.LoadStruct<ItemInventory>(CHR, Memory.RD(CHR.HNDL, PTR + OFS.GetInt("Inventory_Array")), MAX_ITEMS);
         }
 
         public int GetFirstFreePlace()
         {
             Load();
-            foreach (Item i in IL)
+            foreach (ItemInventory i in IL)
                 if (i.id == 0 || i.ptr == 0)
                     return i.place;
             return -1;
@@ -53,7 +35,7 @@ namespace PwLib
         {
             Load();
             int FC = 0;
-            foreach (Item i in IL)
+            foreach (ItemInventory i in IL)
                 if (i.id == 0 || i.ptr == 0)
                     FC++;
             return FC;
@@ -62,7 +44,7 @@ namespace PwLib
         public Boolean HasItemsFromList(int[] ids)
         {
             Organize();
-            foreach (Item i in IL)
+            foreach (ItemInventory i in IL)
                 if (ids.Contains(i.id))
                     return true;
             return false;
@@ -72,16 +54,16 @@ namespace PwLib
         {
             Load();
             int sum = 0;
-            foreach (Item i in IL)
+            foreach (ItemInventory i in IL)
                 if (i.id == id)
                     sum += i.count;
             return sum;
         }
 
-        public Item GetFirstById(int id)
+        public ItemInventory GetFirstById(int id)
         {
             Load();
-            foreach (Item i in IL)
+            foreach (ItemInventory i in IL)
                 if (i.id == id)
                     return i;
             return null;
@@ -111,8 +93,8 @@ namespace PwLib
         public void Organize()
         {
             Load();
-            Item[] l = new Item[MAX_ITEMS];
-            foreach (Item i in IL)
+            ItemInventory[] l = new ItemInventory[MAX_ITEMS];
+            foreach (ItemInventory i in IL)
                 l[i.place] = i;
             for (int i = 0; i < MAX_ITEMS; i++)
                 if (l[i].id > 0 && l[i].max_count > l[i].count)

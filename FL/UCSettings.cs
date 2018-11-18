@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PwLib;
 
 namespace FL
 {
@@ -22,6 +23,7 @@ namespace FL
         private void LOFSF_CheckedChanged(object sender, EventArgs e)
         {
             PwLib.Config.SetBool("LocalOffsets", LOFSF.Checked);
+            OFS.Init();
         }
     }
 }

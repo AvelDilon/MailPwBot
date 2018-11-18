@@ -56,6 +56,12 @@
     <Compile Include="UCAL.Designer.cs">
       <DependentUpon>UCAL.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCClients.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCClients.Designer.cs">
+      <DependentUpon>UCClients.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCDebug.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCAL.resx">
       <DependentUpon>UCAL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCClients.resx">
+      <DependentUpon>UCClients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCDebug.resx">
       <DependentUpon>UCDebug.cs</DependentUpon>

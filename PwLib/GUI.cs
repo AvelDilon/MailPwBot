@@ -86,18 +86,13 @@ namespace PwLib
         }
     }
 
-    public class GUI
+    public class GUI : UserClassObject
     {
-        private Character CHR;
         private int GO = 0;
 
         public List<GameWindow> WL = new List<GameWindow>();
 
-        public GUI(Character CHR)
-        {
-            this.CHR = CHR;
-            LoadAllWindows();
-        }
+        public GUI(Character CHR) : base(CHR) { LoadAllWindows(); }
 
         public void LoadAllWindows()
         {

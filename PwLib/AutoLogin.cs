@@ -131,8 +131,7 @@ namespace PwLib
                 XR.ReadToFollowing("MrPage2");
                 XR.MoveToAttribute("Location");
                 String NL = XR.Value;
-                w = new Web(NL);
-                w.Get();
+                Web.Get(NL);
                 String Mpop = "";
                 foreach (Cookie c in Web.CC.GetCookies(new Uri("https://authdl.mail.ru")))
                 {
@@ -163,7 +162,8 @@ namespace PwLib
                 XR.ReadToFollowing("Pers");
                 XR.MoveToAttribute("Id");
                 PersId = XR.Value;
-                CMD_PARAMS = "console:1 startbypatcher user:" + PersId + " _user:" + _PersId + " token2:" + token2;
+                Web.Get("https://pw.mrac.games.mail.ru/launchmode?user=" + _PersId);
+                CMD_PARAMS = "startbypatcher user:" + PersId + " _user:" + _PersId + " token2:" + token2;
                 return true;
             }
             catch { return false; }
@@ -235,22 +235,23 @@ namespace PwLib
                     return false;
                 Client CL = Client.GetByTitle(ACC_DESC);
                 if (CL == null) { Utils.Delay(1000); continue; }
-                if (!CL.CHR.WND.WaitForWindow("Win_LoginServerListButton", 20))
+                GUI WND = CL.CHR.GetClass<GUI>();
+                if (!WND.WaitForWindow("Win_LoginServerListButton", 20))
                     return false;
                 Utils.Delay(1500);
-                CL.CHR.WND.Click("Win_LoginServerListButton", "confirm");
-                if (!CL.CHR.WND.WaitForWindow("Win_PwdHint", 10, false))
+                WND.Click("Win_LoginServerListButton", "confirm");
+                if (!WND.WaitForWindow("Win_PwdHint", 10, false))
                     return false;
                 Utils.Delay(1000);
-                CL.CHR.WND.Click("Win_PwdHint", "IDCANCEL");
-                if (!CL.CHR.WND.WaitForWindow("Win_Select", 10, false))
+                WND.Click("Win_PwdHint", "IDCANCEL");
+                if (!WND.WaitForWindow("Win_Select", 10, false))
                     return false;
                 Utils.Delay(1000);
-                CL.CHR.WND.Click("Win_Select", "Rdo_Char" + character_number);
-                if (!CL.CHR.WND.WaitForWindow("Win_Manage", 10, false))
+                WND.Click("Win_Select", "Rdo_Char" + character_number);
+                if (!WND.WaitForWindow("Win_Manage", 10, false))
                     return false;
                 Utils.Delay(1000);
-                CL.CHR.WND.Click("Win_Manage", "Btn_Game");
+                WND.Click("Win_Manage", "Btn_Game");
                 return CL.WaitEnterTheGame(40);
             }
         }

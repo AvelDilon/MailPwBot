@@ -12,15 +12,11 @@ namespace PwLib
     {
         public static Dictionary<String, String> SERVERS = new Dictionary<String, String>()
         {
-            { "", "drakon" },
             { "Дракон", "drakon" },
-            { "Орион", "orion" },
+            { "Саргас", "sargas" },
             { "Электра", "electra" },
             { "Мира", "mira" },
             { "Гелиос", "gelios" },
-            { "Атлас", "atlas" },
-            { "Кассиопея", "kassiopeya" },
-            { "Лисичка", "lisichka" },
             { "Гидра", "gidra" },
             { "Цербер", "cerberus" }
         };

@@ -11,13 +11,13 @@ namespace PwLib
     {
         public static Dictionary<String, Thread> THL = new Dictionary<String, Thread>();
 
-        public static void StartNewThread(ThreadStart P, string Name)
+        public static void StartNewThread(ThreadStart P, string TName, Action CallBack = null)
         {
-            if (THL.Keys.Contains(Name))
+            if (THL.Keys.Contains(TName))
                 return;
-            Thread CT = new Thread(P);
-            CT.Name = Name;
-            THL.Add(Name, CT);
+            P += () => { THH.SelfStop(TName); CallBack?.Invoke(); };
+            Thread CT = new Thread(P) { Name = TName };
+            THL.Add(TName, CT);
             CT.Start();
         }
 

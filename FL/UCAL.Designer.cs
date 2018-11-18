@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.PIL = new System.Windows.Forms.ListView();
-            this.SetClient = new System.Windows.Forms.Button();
-            this.AddAcc = new System.Windows.Forms.Button();
             this.ALCM = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AccAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.AccEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.AccDel = new System.Windows.Forms.ToolStripMenuItem();
+            this.SetClient = new System.Windows.Forms.Button();
+            this.AddAcc = new System.Windows.Forms.Button();
             this.ALCM.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,16 +44,46 @@
             this.PIL.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PIL.ContextMenuStrip = this.ALCM;
             this.PIL.LabelWrap = false;
-            this.PIL.Location = new System.Drawing.Point(20, 30);
+            this.PIL.Location = new System.Drawing.Point(30, 30);
             this.PIL.Margin = new System.Windows.Forms.Padding(0);
             this.PIL.MultiSelect = false;
             this.PIL.Name = "PIL";
             this.PIL.ShowGroups = false;
-            this.PIL.Size = new System.Drawing.Size(590, 320);
+            this.PIL.Size = new System.Drawing.Size(570, 320);
             this.PIL.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.PIL.TabIndex = 11;
             this.PIL.UseCompatibleStateImageBehavior = false;
             this.PIL.DoubleClick += new System.EventHandler(this.PIL_DoubleClick);
+            // 
+            // ALCM
+            // 
+            this.ALCM.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AccAdd,
+            this.AccEdit,
+            this.AccDel});
+            this.ALCM.Name = "ALCM";
+            this.ALCM.Size = new System.Drawing.Size(129, 70);
+            // 
+            // AccAdd
+            // 
+            this.AccAdd.Name = "AccAdd";
+            this.AccAdd.Size = new System.Drawing.Size(128, 22);
+            this.AccAdd.Text = "Добавить";
+            this.AccAdd.Click += new System.EventHandler(this.AccAdd_Click);
+            // 
+            // AccEdit
+            // 
+            this.AccEdit.Name = "AccEdit";
+            this.AccEdit.Size = new System.Drawing.Size(128, 22);
+            this.AccEdit.Text = "Изменить";
+            this.AccEdit.Click += new System.EventHandler(this.AccEdit_Click);
+            // 
+            // AccDel
+            // 
+            this.AccDel.Name = "AccDel";
+            this.AccDel.Size = new System.Drawing.Size(128, 22);
+            this.AccDel.Text = "Удалить";
+            this.AccDel.Click += new System.EventHandler(this.AccDel_Click);
             // 
             // SetClient
             // 
@@ -74,36 +104,6 @@
             this.AddAcc.Text = "Добавить аккаунт";
             this.AddAcc.UseVisualStyleBackColor = true;
             this.AddAcc.Click += new System.EventHandler(this.AddAcc_Click);
-            // 
-            // ALCM
-            // 
-            this.ALCM.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AccAdd,
-            this.AccEdit,
-            this.AccDel});
-            this.ALCM.Name = "ALCM";
-            this.ALCM.Size = new System.Drawing.Size(129, 70);
-            // 
-            // AccAdd
-            // 
-            this.AccAdd.Name = "AccAdd";
-            this.AccAdd.Size = new System.Drawing.Size(180, 22);
-            this.AccAdd.Text = "Добавить";
-            this.AccAdd.Click += new System.EventHandler(this.AccAdd_Click);
-            // 
-            // AccEdit
-            // 
-            this.AccEdit.Name = "AccEdit";
-            this.AccEdit.Size = new System.Drawing.Size(180, 22);
-            this.AccEdit.Text = "Изменить";
-            this.AccEdit.Click += new System.EventHandler(this.AccEdit_Click);
-            // 
-            // AccDel
-            // 
-            this.AccDel.Name = "AccDel";
-            this.AccDel.Size = new System.Drawing.Size(180, 22);
-            this.AccDel.Text = "Удалить";
-            this.AccDel.Click += new System.EventHandler(this.AccDel_Click);
             // 
             // UCAL
             // 

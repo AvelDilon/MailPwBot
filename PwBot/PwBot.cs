@@ -29,27 +29,12 @@ namespace PwBot
 
         public void Init()
         {
-            OFS.Init(PwLib.Config.GetBool("LocalOffsets"));
+            OFS.Init();
             UCL.Init();
+            Controls.Add(new UCClients());
             FillTc();
-            ScanClients();
             UCAL.Instance.DrawAccs();
             DrawTrayLogins();
-        }
-
-        private void ScanClients()
-        {
-            PRS.Items.Clear();
-            Client.Init();
-            foreach (Client IC in Client.CL)
-                PRS.Items.Add(IC.CHR.Name);
-            if (Client.CL.Count > 0)
-                PRS.SelectedIndex = PRS.Items.IndexOf(Client.CC.CHR.Name);
-        }
-
-        private void SCAN_Click(object sender, EventArgs e)
-        {
-            ScanClients();
         }
 
         private void FillTc()
@@ -60,15 +45,6 @@ namespace PwBot
                 if (i.visible)
                     TC1.TabPages.Add(i.TP);
             TC1.SelectedIndex = csi;
-        }
-
-        private void PRS_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            foreach (Client IC in Client.CL)
-                if (IC.CHR.Name.Equals(PRS.SelectedItem))
-                    Client.CC = IC;
-            UCBeasts.RefreshMe();
-            UCFairy.RefreshMe();
         }
 
         private void PWS_FormClosing(object sender, FormClosingEventArgs e)
@@ -130,7 +106,7 @@ namespace PwBot
 
         private void BotClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

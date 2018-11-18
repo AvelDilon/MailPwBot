@@ -111,29 +111,6 @@ namespace PwLib
         }
     }
 
-    public class BeastItem : Item
-    {
-        public Boolean NeedIncube = false;
-        public BeastItem(Character CHR) : base(CHR) { IT = ItemType.BeastInventory; }
-
-        public static BeastItem FromItem(Item i) { BeastItem bi = new BeastItem(i.CHR); bi.id = i.id; bi.count = i.count; return bi; }
-
-        public void PutToBI() { new Packet(CHR.HNDL, "C7-00-00-00-00-00-00-00-00-00-00-00-00-00").Copy(id, 6, 4).Copy(count, 10, 4).Send(); Utils.RandomDelay(); }
-        public void GetFromBI() { new Packet(CHR.HNDL, "C7-00-01-00-00-00-00-00-00-00-00-00-00-00").Copy(id, 6, 4).Copy(count, 10, 4).Send(); Utils.RandomDelay(); }
-
-        public void Incube()
-        {
-            if (!NeedIncube)
-                return;
-            Packet P = new Packet(CHR.HNDL, "C0-00-32-15-00-00-10-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00");
-            P.CopyR(CHR.ID, 14, 4);
-            P.CopyR(CHR.ID, 18, 4);
-            P.CopyR(id, 22, 4);
-            P.Send();
-            Utils.RandomDelay();
-        }
-    }
-
     public class BeastReward
     {
         private static List<BeastReward> BRL = new List<BeastReward>();

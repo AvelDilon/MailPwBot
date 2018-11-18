@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PwBot));
-            this.PRS = new System.Windows.Forms.ComboBox();
-            this.SCAN = new System.Windows.Forms.Button();
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.TrayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.RunTrayMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,26 +37,6 @@
             this.TC1 = new System.Windows.Forms.TabControl();
             this.TrayMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // PRS
-            // 
-            this.PRS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PRS.FormattingEnabled = true;
-            this.PRS.Location = new System.Drawing.Point(263, 9);
-            this.PRS.Name = "PRS";
-            this.PRS.Size = new System.Drawing.Size(250, 21);
-            this.PRS.TabIndex = 3;
-            this.PRS.SelectedIndexChanged += new System.EventHandler(this.PRS_SelectedIndexChanged);
-            // 
-            // SCAN
-            // 
-            this.SCAN.Location = new System.Drawing.Point(519, 8);
-            this.SCAN.Name = "SCAN";
-            this.SCAN.Size = new System.Drawing.Size(105, 23);
-            this.SCAN.TabIndex = 4;
-            this.SCAN.Text = "Найти клиенты";
-            this.SCAN.UseVisualStyleBackColor = true;
-            this.SCAN.Click += new System.EventHandler(this.SCAN_Click);
             // 
             // TrayIcon
             // 
@@ -106,8 +84,6 @@
             this.BackColor = System.Drawing.SystemColors.GrayText;
             this.ClientSize = new System.Drawing.Size(634, 511);
             this.Controls.Add(this.TC1);
-            this.Controls.Add(this.SCAN);
-            this.Controls.Add(this.PRS);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -123,8 +99,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox PRS;
-        private System.Windows.Forms.Button SCAN;
         private System.Windows.Forms.NotifyIcon TrayIcon;
         private System.Windows.Forms.ContextMenuStrip TrayMenu;
         private System.Windows.Forms.ToolStripMenuItem BotClose;

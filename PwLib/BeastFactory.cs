@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace PwLib
 {
-    public class BeastFactory
+    public class BeastFactory : UserClassObject
     {
         public static int MBO = OFS.GetInt("BeastStruct");
         private static int[] BagsId = new int[] { 51759, 51758, 51757, 51756 };
         public Boolean IsRun = false;
-        private Character CHR = null;
         public Dictionary<int, Beast> MY = new Dictionary<int, Beast>();
         public Dictionary<int, Beast> ENEMY = new Dictionary<int, Beast>();
-        public Dictionary<int, BeastItem> BIL = new Dictionary<int, BeastItem>();
+        public Dictionary<int, ItemBeast> BIL = new Dictionary<int, ItemBeast>();
         public int Points = -1;
         public int PointLimit = 3000;
         public int Reward = -1;
@@ -22,7 +21,7 @@ namespace PwLib
         public Boolean OpenBags = true;
         public Boolean SkipBattles = true;
 
-        public BeastFactory(Character CHR) { this.CHR = CHR; Beast.Init(); BeastReward.Init(); }
+        public BeastFactory(Character CHR) : base(CHR) { Beast.Init(); BeastReward.Init(); }
 
         public void Run()
         {
@@ -47,13 +46,13 @@ namespace PwLib
             Utils.RandomDelay();
             if (SkipBattles)
             {
-                if (CHR.WND.WaitForCurrentWindow("Win_HomePetPrepare", 10))
-                    CHR.WND.Click("Win_HomePetPrepare", "Btn_Skip");
+                if (CHR.GetClass<GUI>().WaitForCurrentWindow("Win_HomePetPrepare", 10))
+                    CHR.GetClass<GUI>().Click("Win_HomePetPrepare", "Btn_Skip");
             }
-            if (CHR.WND.WaitForCurrentWindow("Win_HomePetFirstAward", SkipBattles ? 10 : 60))
+            if (CHR.GetClass<GUI>().WaitForCurrentWindow("Win_HomePetFirstAward", SkipBattles ? 10 : 60))
             {
                 GetPrizeBag();
-                CHR.WND.Click("Win_HomePetFirstAward", "Btn_Close");
+                CHR.GetClass<GUI>().Click("Win_HomePetFirstAward", "Btn_Close");
             }
             Run();
             THH.SelfStop("BeastBattle:" + CHR.Name);
@@ -87,7 +86,7 @@ namespace PwLib
 
         public void LoadInventory()
         {
-            CHR.WND.Click("Win_HomePetMain", "Btn_Storage");
+            CHR.GetClass<GUI>().Click("Win_HomePetMain", "Btn_Storage");
             BIL.Clear();
             int rr = -1;
             int BIB = Memory.RD(CHR.HNDL, MBO + OFS.GetInt("BS_InventoryBegin"));
@@ -98,13 +97,13 @@ namespace PwLib
                 EF.ReadProcessMemory(CHR.HNDL, BIB, buffer, buffer.Length, ref rr);
                 int[] oa = new int[buffer.Length / 4];
                 Buffer.BlockCopy(buffer, 0, oa, 0, buffer.Length);
-                BeastItem NBI = new BeastItem(CHR);
+                ItemBeast NBI = new ItemBeast(CHR);
                 NBI.id = oa[OFS.GetInt("BS_BI_ID") / 4];
                 NBI.count = oa[OFS.GetInt("BS_BI_Count") / 4];
                 BIL.Add(NBI.id, NBI);
                 BIB += OFS.GetInt("BS_InventoryItemSize");
             }
-            CHR.WND.Click("Win_HomePetMain", "Btn_Storage");
+            CHR.GetClass<GUI>().Click("Win_HomePetMain", "Btn_Storage");
         }
 
         public void LoadMyBeastStruct()
@@ -180,22 +179,22 @@ namespace PwLib
 
         public void MoveAllBeastsToStore()
         {
-            CHR.WND.Click("Win_HomePetMain", "Btn_Storage");
-            CHR.INV.Load();
-            foreach (Item i in CHR.INV.IL)
+            CHR.GetClass<GUI>().Click("Win_HomePetMain", "Btn_Storage");
+            CHR.GetClass<Inventory>().Load();
+            foreach (ItemInventory i in CHR.GetClass<Inventory>().IL)
                 if (i.id >= Beast.ITEM_BASE + Beast.MIN_ITEM && i.id <= Beast.ITEM_BASE + Beast.MAX_ITEM)
-                    BeastItem.FromItem(i).PutToBI();
-            CHR.WND.Click("Win_HomePetMain", "Btn_Storage");
+                    ItemBeast.FromItem(i).PutToBI();
+            CHR.GetClass<GUI>().Click("Win_HomePetMain", "Btn_Storage");
         }
 
         public void OpenAllBags()
         {
             if (!OpenBags)
                 return;
-            CHR.INV.Load();
-            while (CHR.INV.HasItemsFromList(BagsId))
+            CHR.GetClass<Inventory>().Load();
+            while (CHR.GetClass<Inventory>().HasItemsFromList(BagsId))
             {
-                foreach (Item i in CHR.INV.IL)
+                foreach (ItemInventory i in CHR.GetClass<Inventory>().IL)
                     if (BagsId.Contains(i.id))
                         i.Use();
                 Utils.RandomDelay(3500, 4500);
@@ -218,7 +217,7 @@ namespace PwLib
                 BIL[iid].NeedIncube = !find;
             }
             Boolean RESULT = false;
-            foreach (BeastItem BI in BIL.Values)
+            foreach (ItemBeast BI in BIL.Values)
                 if (BI.NeedIncube)
                 {
                     RESULT = true;
@@ -336,7 +335,7 @@ namespace PwLib
 
         public void GetPrizeBag()
         {
-            if (CHR.INV.GetFreeCount() < 1)
+            if (CHR.GetClass<Inventory>().GetFreeCount() < 1)
                 return;
             Packet P = new Packet(CHR.HNDL, "C0-00-3A-15-00-00-0C-00-00-00-00-A4-20-1A-00-00-00-00-00-00-00-00");
             P.CopyR(CHR.ID, 14, 4);
@@ -348,7 +347,7 @@ namespace PwLib
         public void GetReward()
         {
             int RN = BeastReward.GetRewardNumber(Points, Reward);
-            if (RN < 1 || CHR.INV.GetFreeCount() < 1)
+            if (RN < 1 || CHR.GetClass<Inventory>().GetFreeCount() < 1)
                 return;
             Packet P = new Packet(CHR.HNDL, "C0-00-3B-15-00-00-10-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00");
             P.CopyR(CHR.ID, 14, 4);

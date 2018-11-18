@@ -7,35 +7,35 @@ using System.Threading.Tasks;
 
 namespace PwLib
 {
-    public class AutoItemOpen
+    public class AutoItemOpen : UserClassObject
     {
-        public int item = 1;
+        public int item = -1;
         public int delay = 1;
-        public bool IsRun;
-        public Character CHR;
+        public bool IsRun = false;
 
-        public AutoItemOpen(Character CHR, int item, int delay)
-        {
-            this.CHR = CHR;
-            this.item = item;
-            this.delay = delay;
-        }
+        public AutoItemOpen(Character CHR) : base(CHR) { }
 
         public void OpenItem()
         {
-            CHR.INV.Load();
-            Item UI = CHR.INV.GetFirstById(item);
+            //CHR.GetClass<Inventory>().Load();
+            ItemInventory UI = CHR.GetClass<Inventory>().GetFirstById(item);
             if (UI == null)
                 return;
             UI.Use();
             Utils.RandomDelay(delay * 1000 - 300, (delay + 1) * 1000 + 300);
-            this.OpenItem();
+            OpenItem();
         }
 
-        public void RunAutoOpen()
+        public void Run()
         {
-            this.IsRun = true;
-            THH.StartNewThread(new ThreadStart(this.OpenItem), "AutoShop:" + this.CHR.Name);
+            IsRun = true;
+            THH.StartNewThread(new ThreadStart(OpenItem), "AutoOpen:" + CHR.Name);
+        }
+
+        public void Stop()
+        {
+            THH.StopThread("AutoOpen:" + CHR.Name);
+            IsRun = false;
         }
     }
 }

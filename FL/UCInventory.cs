@@ -13,22 +13,24 @@ namespace FL
 {
     public partial class UCInventory : UserControl
     {
-        public UCInventory(Character CHR)
+        public static int UCID = 4;
+        public UCInventory(Character CHR, int PARENT)
         {
             InitializeComponent();
+            UCID = PARENT;
             ListInv(CHR);
         }
 
         private void InvCancel_Click(object sender, EventArgs e)
         {
-            UCL.ReturnUC(UCMisc.UCID);
+            UCL.ReturnUC(UCID);
         }
 
         private void ListInv(Character CHR)
         {
-            CHR.INV.Load();
-            List<Item> LA = new List<Item>();
-            foreach (Item i in CHR.INV.IL)
+            CHR.GetClass<Inventory>().Load();
+            List<ItemInventory> LA = new List<ItemInventory>();
+            foreach (ItemInventory i in CHR.GetClass<Inventory>().IL)
                 if (i.id > 0)
                     LA.Add(i);
             ISLB.Items.AddRange(LA.ToArray());
@@ -36,9 +38,9 @@ namespace FL
 
         private void ISLB_DoubleClick(object sender, EventArgs e)
         {
-            Item si = (Item)ISLB.SelectedItem;
+            ItemInventory si = (ItemInventory)ISLB.SelectedItem;
             UCMisc.DIID = si.id;
-            UCL.ReturnUC(UCMisc.UCID);
+            UCL.ReturnUC(UCID);
         }
     }
 }

@@ -6,91 +6,133 @@ using System.Threading.Tasks;
 
 namespace PwLib
 {
-    public class Environment
+    public class Environment : UserClassObject
     {
-        private Character CHR;
-        public List<NPC> NPC_LIST = new List<NPC>();
-        public List<Item> LOOT_LIST = new List<Item>();
+        public List<PwWorldObject> EL = new List<PwWorldObject>();
 
-        public Environment(Character CHR) { this.CHR = CHR; Scan(); }
+        public Environment(Character CHR) : base(CHR) { Scan(); }
 
         public void Scan()
         {
+            EL.Clear();
+            CHR.LoadLocation();
             ScanNPC();
             ScanLoot();
+            ScanPlayers();
         }
 
-        public void ScanNPC()
+        private void ScanNPC()
         {
             int MP = Memory.RD(CHR.HNDL, "BA+GA_OFS+MS_OFS+Mob_Struct");
             int COUNT = Memory.RD(CHR.HNDL, MP + OFS.GetInt("Mob_Count"));
             int MA = Memory.RD(CHR.HNDL, MP + OFS.GetInt("Mob_Array"));
-            NPC_LIST.Clear();
             if (COUNT == 0)
                 return;
             for (int i = 0; i < COUNT; i++)
-                NPC_LIST.Add(new NPC(CHR.HNDL, Memory.RD(CHR.HNDL, MA + i * 0x4)).Load());
+            {
+                int PTR = Memory.RD(CHR.HNDL, MA + i * 0x4);
+                int TYPE = Memory.RD(CHR.HNDL, PTR + OFS.GetInt("Mob_Type"));
+                switch (TYPE)
+                {
+                    case 7:
+                        EL.Add(new PwNpc(CHR, PTR).Load());
+                        break;
+                    case 6:
+                        EL.Add(new PwMob(CHR, PTR).Load());
+                        break;
+                    case 9:
+                        EL.Add(new PwPet(CHR, PTR).Load());
+                        break;
+                    default:
+                        EL.Add(new PwNpc(CHR, PTR).Load());
+                        break;
+                }
+            }
         }
 
-        public void ScanLoot()
+        private void ScanLoot()
         {
             int LP = Memory.RD(CHR.HNDL, "BA+GA_OFS+MS_OFS+Loot_Struct");
             int LA = Memory.RD(CHR.HNDL, LP + OFS.GetInt("Loot_Array"));
             int COUNT = Memory.RD(CHR.HNDL, LP + OFS.GetInt("Loot_Count"));
-            LOOT_LIST.Clear();
             if (COUNT == 0)
                 return;
             for (int i = 0; i < 0x300; i++)
             {
-                Item it = new Item(CHR, Memory.RD(CHR.HNDL, Memory.RD(CHR.HNDL, LA + i * 0x4) + 0x4));
-                if (it.ptr == 0)
+                int PTR = Memory.RD(CHR.HNDL, Memory.RD(CHR.HNDL, LA + i * 0x4) + 0x4);
+                if (PTR == 0)
                     continue;
-                it.LoadLootItem();
-                LOOT_LIST.Add(it);
+                int TYPE = Memory.RD(CHR.HNDL, PTR + OFS.GetInt("Loot_Type"));
+                if (TYPE == 2)
+                    EL.Add(new PwMine(CHR, PTR).Load());
+                else
+                    EL.Add(new ItemLoot(CHR, PTR).Load());
             }
         }
 
-        public NPC GetClosestNpc(int type = 7)
+        private void ScanPlayers()
         {
-            Scan();
-            NPC cn = new NPC(CHR.HNDL);
-            cn.distance = 1000;
-            foreach (NPC n in NPC_LIST)
-                cn = n.distance < cn.distance ? n : cn;
+            int PP = Memory.RD(CHR.HNDL, "BA+GA_OFS+MS_OFS+Players_Struct");
+            int PA = Memory.RD(CHR.HNDL, PP + OFS.GetInt("Players_Array"));
+            int COUNT = Memory.RD(CHR.HNDL, PP + OFS.GetInt("Players_Count"));
+            if (COUNT == 0)
+                return;
+            for (int i = 0; i < COUNT; i++)
+                EL.Add(new PwPlayer(CHR, Memory.RD(CHR.HNDL, PA + i * 0x4)).Load());
+        }
+
+        public List<T> GetList<T>(Boolean order_by_distance = false) where T : class
+        {
+            List<T> r = new List<T>();
+            foreach (PwWorldObject i in EL)
+                if (i.GetType().Equals(typeof(T)))
+                    r.Add(i as T);
+            return order_by_distance ? r.OrderBy(o => (o as PwWorldObject).distance).ToList() : r;
+        }
+
+        public T GetClosest<T>() where T : class
+        {
+            if (!typeof(T).IsSubclassOf(typeof(PwWorldObject)))
+                return null;
+            List<T> L = GetList<T>(true);
+            if (L.Count == 0)
+                return null;
+            return L.First<T>();
+        }
+
+        public T TargetClosest<T>() where T : class
+        {
+            if (!typeof(T).IsSubclassOf(typeof(PwTargetable)))
+                return null;
+            T cn = GetClosest<T>();
+            if (cn == null || (cn as PwTargetable).id == 0)
+                return null;
+            (cn as PwTargetable).Target();
             return cn;
         }
 
-        public NPC TargetClosest(int type = 7)
+        public PwTargetable TargetById(int id)
         {
-            NPC cn = GetClosestNpc(type);
-            if (cn.id == 0)
-                return cn;
-            cn.Target();
-            return cn;
+            foreach (PwObject n in EL)
+                if (n.id == id && n.GetType().IsSubclassOf(typeof(PwTargetable)))
+                    return (n as PwTargetable).Target();
+            return null;
         }
 
-        public NPC TargetById(int id)
+        public PwTargetable TargetByWId(uint wid)
         {
-            Scan();
-            foreach (NPC n in NPC_LIST)
-                if (n.id == id)
-                {
-                    n.Target();
-                    return n;
-                }
-            return new NPC(CHR.HNDL);
+            foreach (PwObject n in EL)
+                if (n.wid == wid && n.GetType().IsSubclassOf(typeof(PwTargetable)))
+                    return (n as PwTargetable).Target();
+            return null;
         }
 
-        public NPC TargetByName(String name)
+        public PwTargetable TargetByName(String name)
         {
-            Scan();
-            foreach (NPC n in NPC_LIST)
-                if (n.name.Equals(name))
-                {
-                    n.Target();
-                    return n;
-                }
-            return new NPC(CHR.HNDL);
+            foreach (PwTargetable n in EL)
+                if (n.GetType().IsSubclassOf(typeof(PwTargetable)) && n.name.Equals(name))
+                    return (n as PwTargetable).Target();
+            return null;
         }
     }
 }

@@ -47,6 +47,7 @@
             this.OpenStart.Text = "Начать";
             this.OpenStart.UseVisualStyleBackColor = true;
             this.OpenStart.Click += new System.EventHandler(this.OpenStart_Click);
+            this.OpenStart.Paint += new System.Windows.Forms.PaintEventHandler(this.OpenStart_Paint);
             // 
             // label14
             // 
@@ -107,6 +108,7 @@
             this.INV_SELECT.Text = "Из инвентаря";
             this.INV_SELECT.UseVisualStyleBackColor = true;
             this.INV_SELECT.Click += new System.EventHandler(this.INV_SELECT_Click);
+            this.INV_SELECT.Paint += new System.Windows.Forms.PaintEventHandler(this.INV_SELECT_Paint);
             // 
             // UCMisc
             // 

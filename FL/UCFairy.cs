@@ -31,13 +31,13 @@ namespace FL
         {
             if (FairyStart.Text.Equals("Запустить"))
             {
-                try { Client.CC.CHR.FAIRY.GOODNEES = 100 - UInt32.Parse(FG.Text); } catch { FG.Text = "70"; }
-                Client.CC.CHR.FAIRY.RunFairyEnchancement();
+                try { Client.CC.CHR.GetClass<FairyFactory>().GOODNEES = 100 - UInt32.Parse(FG.Text); } catch { FG.Text = "70"; }
+                Client.CC.CHR.GetClass<FairyFactory>().RunFairyEnchancement();
                 FairyStart.Text = "Остановить";
             }
             else
             {
-                Client.CC.CHR.FAIRY.StopFairyEnchancement();
+                Client.CC.CHR.GetClass<FairyFactory>().StopFairyEnchancement();
                 FairyStart.Text = "Запустить";
             }
         }
@@ -50,7 +50,7 @@ namespace FL
                 return;
             }
             FairyStart.Enabled = true;
-            if (Client.CC.CHR.FAIRY.IsRun)
+            if (Client.CC.CHR.GetClass<FairyFactory>().IsRun)
                 FairyStart.Text = "Остановить";
             else
                 FairyStart.Text = "Запустить";

@@ -44,6 +44,8 @@ namespace PwLib
             catch { return this; }
         }
 
+        public static Web Get(String URL) { return new Web(URL).Get(); }
+
         public Web Post(Dictionary<String,String> post_array)
         {
             try

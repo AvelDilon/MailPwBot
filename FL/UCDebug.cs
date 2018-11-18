@@ -24,41 +24,58 @@ namespace FL
             Client.CC.CHR.Load();
             LTB.Clear();
             LTB.AppendText("Персонаж: " + Client.CC.CHR.Name + "\r\n");
-            LTB.AppendText("ID: " + Client.CC.CHR.ID + "\r\n");
+            LTB.AppendText("ID: " + Client.CC.CHR.ID + " [" + Client.CC.CHR.ID.ToString("X4") + "]\r\n");
             LTB.AppendText("================================\r\n");
             LTB.AppendText("X: " + Client.CC.CHR.LOC.x + "\t [" + Client.CC.CHR.LOC.gx + "]\r\n");
             LTB.AppendText("Y: " + Client.CC.CHR.LOC.y + "\t [" + Client.CC.CHR.LOC.gy + "]\r\n");
             LTB.AppendText("Z: " + Client.CC.CHR.LOC.z + "\t [" + Client.CC.CHR.LOC.gz + "]\r\n");
             LTB.AppendText("================================\r\n");
-            LTB.AppendText("LVL: " + Client.CC.CHR.LVL + "\r\n");
+            LTB.AppendText("LVL: " + Client.CC.CHR.GetVar("LVL") + "\r\n");
+            LTB.AppendText("WALK_MODE: " + Client.CC.CHR.GetVar("WalkMode") + "\r\n");
             LTB.AppendText("================================\r\n");
             LTB.AppendText("LOC: " + Client.CC.CHR.LOC_NAME + " [" + Client.CC.CHR.LOC_ID + "]\r\n");
             LTB.AppendText("================================\r\n");
         }
 
-        private void NPC_Click(object sender, EventArgs e)
+        private void ENV_Click(object sender, EventArgs e)
         {
+            PwLib.Environment ENV = Client.CC.CHR.GetClass<PwLib.Environment>();
+            ENV.Scan();
             LTB.Clear();
+            LTB.AppendText("============== Players ============\r\n");
+            foreach (PwPlayer n in ENV.GetList<PwPlayer>())
+                LTB.AppendText("(" + n.id.ToString("X4") + ") [" + n.cls.name + "] " + n.name + " [DIST: " + n.distance + "] [loc: " + n.loc.x + "; " + n.loc.y + "; " + n.loc.z + "]\r\n");
             LTB.AppendText("============== MOBs ============\r\n");
-            Client.CC.CHR.ENV.ScanLoot();
-            foreach (NPC n in Client.CC.CHR.ENV.NPC_LIST)
-                LTB.AppendText(n.id + " [" + n.wid.ToString("X4") + "] (" + n.type + ") ~~ " + n.name +
-                    "\r\n[DIST: " + n.distance + "] [LOC: " + n.LOC.x + "; " + n.LOC.y + "; " + n.LOC.z + "]\r\n");
+            foreach (PwMob n in ENV.GetList<PwMob>())
+                LTB.AppendText(n.id + " [" + n.wid.ToString("X4") + "] (" + n.type + ") ~~ " + n.name + "\r\n[DIST: " + n.distance + "] [loc: " + n.loc.x + "; " + n.loc.y + "; " + n.loc.z + "]\r\n");
+            LTB.AppendText("============== NPCs ============\r\n");
+            foreach (PwNpc n in ENV.GetList<PwNpc>())
+                LTB.AppendText(n.id + " [" + n.wid.ToString("X4") + "] (" + n.type + ") ~~ " + n.name + "\r\n[DIST: " + n.distance + "] [loc: " + n.loc.x + "; " + n.loc.y + "; " + n.loc.z + "]\r\n");
+            LTB.AppendText("============== PETs ============\r\n");
+            foreach (PwPet n in ENV.GetList<PwPet>())
+                LTB.AppendText(n.id + " [" + n.wid.ToString("X4") + "] (" + n.type + ") ~~ " + n.name + "\r\n[DIST: " + n.distance + "] [loc: " + n.loc.x + "; " + n.loc.y + "; " + n.loc.z + "]\r\n");
+            LTB.AppendText("============== Loot ============\r\n");
+            foreach (ItemLoot n in ENV.GetList<ItemLoot>())
+                LTB.AppendText(n.DebugString(true));
+            LTB.AppendText("============== Mines ============\r\n");
+            foreach (PwMine n in ENV.GetList<PwMine>())
+                LTB.AppendText(n.DebugString(true));
         }
 
         private void TEST_Click(object sender, EventArgs e)
         {
+            BeastFactory MBF = Client.CC.CHR.GetClass<BeastFactory>();
             LTB.Clear();
             LTB.AppendText("[======= RUN TEST! =======]\r\n");
             //Client.CC.CHR.MBF.OpenBattle();
-            Client.CC.CHR.MBF.LoadMine();
-            Client.CC.CHR.MBF.LoadEnemy();
-            Beast[] BB = Client.CC.CHR.MBF.AnalizeEnemy();
-            LTB.AppendText("[GamesRemain    " + Client.CC.CHR.MBF.GamesRemain + "   =======]\r\n");
-            LTB.AppendText("[Points         " + Client.CC.CHR.MBF.Points + "    =======]\r\n");
-            LTB.AppendText("[Reward         " + Client.CC.CHR.MBF.Reward + "    =======]\r\n");
+            MBF.LoadMine();
+            MBF.LoadEnemy();
+            Beast[] BB = MBF.AnalizeEnemy();
+            LTB.AppendText("[GamesRemain    " + MBF.GamesRemain + "   =======]\r\n");
+            LTB.AppendText("[Points         " + MBF.Points + "    =======]\r\n");
+            LTB.AppendText("[Reward         " + MBF.Reward + "    =======]\r\n");
             LTB.AppendText("[======= MY! =======]\r\n");
-            foreach (Beast b in Client.CC.CHR.MBF.MY.Values)
+            foreach (Beast b in MBF.MY.Values)
             {
                 LTB.AppendText("ID:" + b.ID + "\r\n");
                 LTB.AppendText("IID:" + b.ItemId + "\r\n");
@@ -74,7 +91,7 @@ namespace FL
                 LTB.AppendText("[========================]\r\n");
             }
             LTB.AppendText("[======= ENEMY! =======]\r\n");
-            foreach (Beast b in Client.CC.CHR.MBF.ENEMY.Values)
+            foreach (Beast b in MBF.ENEMY.Values)
             {
                 LTB.AppendText("ID:" + b.ID + "\r\n");
                 LTB.AppendText("Name:" + b.Name + "\r\n");
@@ -102,7 +119,7 @@ namespace FL
                 LTB.AppendText("[========================]\r\n");
             }
             LTB.AppendText("[======= INVENTARY! =======]\r\n");
-            foreach (BeastItem bi in Client.CC.CHR.MBF.BIL.Values)
+            foreach (ItemBeast bi in MBF.BIL.Values)
             {
                 LTB.AppendText("ID:" + bi.id + "\r\n");
                 LTB.AppendText("Count:" + bi.count + "\r\n");
@@ -115,7 +132,7 @@ namespace FL
         {
             LTB.Clear();
             LTB.AppendText("============== Current WINDOW ============\r\n");
-            GameWindow w = Client.CC.CHR.WND.GetCurrentWindow();
+            GameWindow w = Client.CC.CHR.GetClass<GUI>().GetCurrentWindow();
             LTB.AppendText(w.name + " [" + w.ptr.ToString("X4") + "] {" + w.visibility + "}\r\n");
             foreach (WindowControl c in w.CL)
                 LTB.AppendText(c.name + " ==> [" + c.ptr.ToString("X4") + "]\r\n" + c.CN + " (LNG: " + c.CN.Length + ") ==> [" + c.CP.ToString("X4") + "]\r\n");
@@ -125,22 +142,13 @@ namespace FL
         {
             LTB.Clear();
             LTB.AppendText("============== WINDOWS ============\r\n");
-            Client.CC.CHR.WND.LoadAllWindows();
-            foreach (GameWindow w in Client.CC.CHR.WND.WL)
+            Client.CC.CHR.GetClass<GUI>().LoadAllWindows();
+            foreach (GameWindow w in Client.CC.CHR.GetClass<GUI>().WL)
             {
                 LTB.AppendText(w.name + " ==> [" + w.visibility + "] ~~ " + w.ptr + " (" + w.GF.ToString("X4") + ")\r\n");
                 /*foreach (WindowControl c in w.CL)
                     LTB.AppendText("  CNT: " + c.name + " ==> [" + c.CN + "]\r\n");*/
             }
-        }
-
-        private void Loot_Click(object sender, EventArgs e)
-        {
-            LTB.Clear();
-            LTB.AppendText("============== Loot ============\r\n");
-            Client.CC.CHR.ENV.ScanLoot();
-            foreach (Item i in Client.CC.CHR.ENV.LOOT_LIST)
-                LTB.AppendText(i.DebugString());
         }
 
         private void EH_Click(object sender, EventArgs e)
@@ -154,7 +162,7 @@ namespace FL
             {
                 LTB.Clear();
                 LTB.AppendText("CLICK control (" + TV2.Text + ") in window [" + TV1.Text + "]\r\n");
-                Client.CC.CHR.WND.Click(TV1.Text, TV2.Text);
+                Client.CC.CHR.GetClass<GUI>().Click(TV1.Text, TV2.Text);
             }
         }
 
@@ -162,8 +170,8 @@ namespace FL
         {
             LTB.Clear();
             LTB.AppendText("============== FAIRY ============\r\n");
-            FairyItem FFE = Client.CC.CHR.FAIRY.SelectFairyForEnchance();
-            foreach (FairyItem FI in Client.CC.CHR.FAIRY.FL)
+            ItemFairy FFE = Client.CC.CHR.GetClass<FairyFactory>().SelectFairyForEnchance();
+            foreach (ItemFairy FI in Client.CC.CHR.GetClass<FairyFactory>().FL)
             {
                 LTB.AppendText("ID:" + FI.id + "\r\n");
                 LTB.AppendText("LVL:" + FI.lvl + "\r\n");
@@ -179,29 +187,61 @@ namespace FL
             {
                 LTB.Clear();
                 LTB.AppendText("CLICK control (" + TV2.Text + ") in window [" + TV1.Text + "]\r\n");
-                Client.CC.CHR.WND.Click(TV1.Text, TV2.Text);
+                Client.CC.CHR.GetClass<GUI>().Click(TV1.Text, TV2.Text);
             }
         }
 
         private void MoveChar_Click(object sender, EventArgs e)
         {
-            Client.CC.CHR.LoadLocation();
-            Client.CC.CHR.LOC.Add(0.5F, 0.5F, 0F);
-            Client.CC.CHR.Move(Client.CC.CHR.LOC);
+            Location CL = Client.CC.CHR.LoadLocation();
+            CL.Add(2.5F, 2.5F, Client.CC.CHR.GetVar("WalkMode") == 2 ? 2.5F : 0);
+            Client.CC.CHR.Move(CL);
         }
 
         private void ShInv_Click(object sender, EventArgs e)
         {
             LTB.Clear();
             LTB.AppendText("============== Inventary ============\r\n");
-            Client.CC.CHR.INV.Load();
-            foreach (Item i in Client.CC.CHR.INV.IL)
+            Client.CC.CHR.GetClass<Inventory>().Load();
+            foreach (ItemInventory i in Client.CC.CHR.GetClass<Inventory>().IL)
                 LTB.AppendText("ID: " + i.id + " [" + i.id.ToString("X4") + "] TYPE=(" + i.type + ") ~~ PLACE: " + i.place + " COUNT: " + i.count + "\r\n");
         }
 
         private void OpenWnd_Click(object sender, EventArgs e)
         {
-            Client.CC.CHR.WND.Open(TV1.Text);
+            Client.CC.CHR.GetClass<GUI>().Open(TV1.Text);
+        }
+
+        private void Interract_Click(object sender, EventArgs e)
+        {
+            if (Client.CC.CHR.GetClass<PwLib.Environment>().TargetByName(TV1.Text) is PwNpc t)
+                t.Interract(true);
+        }
+
+        private void Dig_Click(object sender, EventArgs e)
+        {
+            Client.CC.CHR.LoadLocation();
+            Client.CC.CHR.GetClass<PwLib.Environment>().Scan();
+            PwMine CM = Client.CC.CHR.GetClass<PwLib.Environment>().GetClosest<PwMine>();
+            if (CM == null)
+                return;
+            Client.CC.CHR.Move(CM.loc, true, 1);
+            CM.Dig();
+        }
+
+        private void ItemUse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ItemInventory ii = Client.CC.CHR.GetClass<Inventory>().GetFirstById(int.Parse(TV1.Text));
+                if (ii == null)
+                    return;
+                LTB.Clear();
+                LTB.AppendText("============== USE ITEM ============\r\n");
+                LTB.AppendText("ID: " + ii.id + " [" + ii.id.ToString("X4") + "] TYPE=(" + ii.type + ") ~~ PLACE: " + ii.place + " COUNT: " + ii.count + "\r\n");
+                ii.Use();
+            }
+            catch { }
         }
     }
 }
